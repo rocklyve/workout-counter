@@ -34,6 +34,8 @@ dependencies:
   flutter_bloc: ^8.1.1
   sqflite: ^2.2.0+3
   dart_code_metrics: ^5.0.1
+  open_earable:
+    path: packages/open_earable
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

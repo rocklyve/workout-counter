@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:open_earable/open_earable_manager.dart';
 
-import '../../../utils/print.dart';
 import 'bluetooth_connection_state.dart';
 
 class BluetoothConnectionCubit extends Cubit<BluetoothConnectionState> {
@@ -15,10 +16,8 @@ class BluetoothConnectionCubit extends Cubit<BluetoothConnectionState> {
   late BluetoothDevice device;
 
   void startObserving() {
-    // Start stream subscription and return stream.
-    print('now start looking for ble devices');
-    // Start scanning
-    flutterBlue.startScan(timeout: Duration(seconds: 4));
+    // Start search process to look for the ble devices.
+    flutterBlue.startScan(timeout: const Duration(seconds: 4));
 
     // Listen to scan results.
     bluetoothDevices = flutterBlue.scanResults.listen(
@@ -39,30 +38,21 @@ class BluetoothConnectionCubit extends Cubit<BluetoothConnectionState> {
   void connectDevice(ScanResult result) async {
     device = result.device;
     await result.device.connect();
-    debugPrintNoOp('${result.device.name} found! rssi: ${result.rssi}');
+
+    // Setup open earable manager.
+    await OpenEarableManager.shared.setup(device);
+
+    debugPrint('${result.device.name} found! rssi: ${result.rssi}');
     emit(BluetoothConnectionState.loaded(device, true));
+    debugPrint(
+        'hereeeee ${await OpenEarableManager.shared.getDeviceIdentifier()}');
   }
 
   void checkout() async {
-    debugPrintNoOp(
+    debugPrint(
       'checkout services/characteristics for device: ${device.name}',
     );
-    List<BluetoothService> services = await device.discoverServices();
-    debugPrintNoOp('found ${services.length} services');
-    services.forEach(
-      (service) {
-        debugPrintNoOp(
-          'found ${service.characteristics.length} characteristics for service ${service.uuid}',
-        );
-        service.characteristics.forEach(
-          (characteristic) async {
-            List<int> value = await characteristic.read();
-            debugPrintNoOp('read: $value');
-          },
-        );
-        // Do something with service.
-      },
-    );
+    await OpenEarableManager.shared.startDataStream();
   }
 
   void stopObserving() async {

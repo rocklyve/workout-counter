@@ -61,15 +61,15 @@ class OpenEarableManager {
   }
 
   // service 1 -> 45622510-6468-465a-b141-0b9b0f96b468 deviceInfoService
-//              45622511-6468-465a-b141-0b9b0f96b468 deviceIdentifierCharacteristic / deviceGenerationCharacteristic
-//              45622512-6468-465a-b141-0b9b0f96b468 deviceIdentifierCharacteristic / deviceGenerationCharacteristic
+  //              45622511-6468-465a-b141-0b9b0f96b468 deviceIdentifierCharacteristic / deviceGenerationCharacteristic
+  //              45622512-6468-465a-b141-0b9b0f96b468 deviceIdentifierCharacteristic / deviceGenerationCharacteristic
 
-// service 2 -> 34c2e3bb-34aa-11eb-adc1-0242ac120002 sensorService
-//              34c2e3bc-34aa-11eb-adc1-0242ac120002 sensorDataCharacteristic
-//              34c2e3bd-34aa-11eb-adc1-0242ac120002 sensorConfigCharacteristic
+  // service 2 -> 34c2e3bb-34aa-11eb-adc1-0242ac120002 sensorService
+  //              34c2e3bc-34aa-11eb-adc1-0242ac120002 sensorDataCharacteristic
+  //              34c2e3bd-34aa-11eb-adc1-0242ac120002 sensorConfigCharacteristic
 
-// sensorDataCharactereistic
-// uuid:        34c2e3bc-34aa-11eb-adc1-0242ac120002
+  // sensorDataCharactereistic
+  // uuid:        34c2e3bc-34aa-11eb-adc1-0242ac120002
 
   Future<String> getDeviceIdentifier() async {
     _guard();

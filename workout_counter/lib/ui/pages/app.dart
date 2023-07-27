@@ -15,21 +15,14 @@ class App extends StatelessWidget {
 
   // final Database database;
 
-  Widget _buildRepositories(BuildContext context, {required Widget child}) {
+  @override
+  Widget build(BuildContext context) {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<DataRepository>(
           create: (context) => DataRepositoryImplementation(),
         ),
       ],
-      child: child,
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildRepositories(
-      context,
       child: Builder(
         builder: (context) {
           return MultiBlocProvider(
@@ -40,9 +33,13 @@ class App extends StatelessWidget {
                 lazy: false,
               ),
             ],
-            child: Builder(builder: (context) {
-              return MaterialApp(home: HomePage());
-            }),
+            child: Builder(
+              builder: (context) {
+                return const MaterialApp(
+                  home: HomePage(),
+                );
+              },
+            ),
           );
         },
       ),

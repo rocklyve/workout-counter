@@ -24,34 +24,27 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () =>
-                      context.read<BluetoothConnectionCubit>().startObserving(),
+                  onPressed: () => context.read<BluetoothConnectionCubit>().startObserving(),
                   child: const Text('Start Search'),
                 ),
                 const SizedBox(height: 10),
                 if (state is BluetoothConnectionStateLoaded)
                   Text(
-                    state.isConnected
-                        ? '${state.device?.name ?? 'Unknown device'} is connected'
-                        : 'not connected',
+                    state.isConnected ? '${state.device?.localName ?? 'Unknown device'} is connected' : 'not connected',
                     style: TextStyle(
                       color: state.isConnected ? Colors.green : Colors.red,
                       fontSize: 16,
                     ),
                   ),
                 const SizedBox(height: 10),
-                if (state is BluetoothConnectionStateLoaded &&
-                    state.isConnected)
+                if (state is BluetoothConnectionStateLoaded && state.isConnected)
                   ElevatedButton(
-                    onPressed: () => context
-                        .read<BluetoothConnectionCubit>()
-                        .stopObserving(),
+                    onPressed: () => context.read<BluetoothConnectionCubit>().stopObserving(),
                     child: const Text('disconnect'),
                   ),
                 const SizedBox(height: 20),
                 ElevatedButton(
-                  onPressed: () =>
-                      context.read<BluetoothConnectionCubit>().checkout(),
+                  onPressed: () => context.read<BluetoothConnectionCubit>().checkout(),
                   child: const Text('checkout services/ characteristics'),
                 ),
               ],

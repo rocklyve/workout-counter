@@ -8,8 +8,11 @@ import 'package:open_earable/open_earable_manager.dart';
 
 import 'bluetooth_connection_state.dart' as bluetoothConnectionState;
 
-class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothConnectionState> {
-  BluetoothConnectionCubit() : super(const bluetoothConnectionState.BluetoothConnectionState.initial());
+class BluetoothConnectionCubit
+    extends Cubit<bluetoothConnectionState.BluetoothConnectionState> {
+  BluetoothConnectionCubit()
+      : super(
+            const bluetoothConnectionState.BluetoothConnectionState.initial());
 
   late StreamSubscription<List<ScanResult>> bluetoothDevices;
   late BluetoothDevice device;
@@ -42,20 +45,29 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
     await OpenEarableManager.shared.setup(device);
 
     debugPrint('${device.localName} found! rssi: ${result.rssi}');
-    emit(bluetoothConnectionState.BluetoothConnectionState.loaded(device, true));
-    debugPrint('hereeeee ${await OpenEarableManager.shared.getDeviceIdentifier()}');
+    emit(
+        bluetoothConnectionState.BluetoothConnectionState.loaded(device, true));
+    debugPrint(
+        'hereeeee ${await OpenEarableManager.shared.getDeviceIdentifier()}');
   }
 
   void checkout() async {
     debugPrint(
       'checkout services/characteristics for device: ${device.localName}',
     );
-    await OpenEarableManager.shared.startDataStream(OEDataConfig(0, 10, 0));
+    Stream<List<int>> dataStream = await OpenEarableManager.shared
+        .startDataStream(OEDataConfig(0, 32, 100));
+    dataStream.listen(
+      (event) {
+        debugPrint('data: $event');
+      },
+    );
   }
 
   void stopObserving() async {
     await device.disconnect();
     await FlutterBluePlus.stopScan();
-    emit(const bluetoothConnectionState.BluetoothConnectionState.loaded(null, false));
+    emit(const bluetoothConnectionState.BluetoothConnectionState.loaded(
+        null, false));
   }
 }

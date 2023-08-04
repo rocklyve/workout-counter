@@ -18,5 +18,10 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Installation
 
-Used flutter version: `3.3.8`
+Used flutter version: `3.10.6`
+
+For building, execute `fvm flutter pub get`.
+For building the freezed stuff, execute `fvm flutter pub run build_runner build --delete-conflicting-outputs`
+
+For running, execute `fvm flutter run`
 

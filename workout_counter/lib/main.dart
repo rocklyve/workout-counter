@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:workout_counter/ui/pages/app.dart';
-import 'package:workout_counter/ui/pages/home_page.dart';
 import 'package:workout_counter/utils/environment.dart';
 import 'package:workout_counter/utils/print.dart';
 
@@ -40,7 +39,7 @@ Future<void> runMain(EnvironmentData environment) async {
 
   // App execution
   runZonedGuarded<void>(
-        () => runApp(
+    () => runApp(
       Environment(
         data: environment,
         child: const App(),

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:open_earable/domain/open_earable_data_config.dart';
+import 'package:open_earable/domain/open_earable_sensor_data_packet.dart';
 import 'package:open_earable/open_earable_manager.dart';
 
 import 'bluetooth_connection_state.dart' as bluetoothConnectionState;
@@ -16,56 +17,63 @@ class BluetoothConnectionCubit
 
   late StreamSubscription<List<ScanResult>> bluetoothDevices;
   late BluetoothDevice device;
+  bool isConnecting = false; // Add this line to manage the connection state
 
   void startObserving() {
-    // Start search process to look for the ble devices.
+    print('start observing called');
     FlutterBluePlus.startScan(timeout: const Duration(seconds: 4));
 
-    // Listen to scan results.
     bluetoothDevices = FlutterBluePlus.scanResults.listen(
       (results) {
-        // Do something with scan results.
         for (ScanResult r in results) {
           if (r.device.localName.contains('Earable')) {
+            if (isConnecting) {
+              // Check if already connecting
+              return;
+            }
+            isConnecting = true; // Set flag to true as you start connecting
+
             FlutterBluePlus.stopScan();
             connectDevice(r);
           }
         }
       },
     );
-
-    return;
   }
 
-  void connectDevice(ScanResult result) async {
+  Future<void> connectDevice(ScanResult result) async {
+    print('connect device called');
     device = result.device;
     await result.device.connect();
 
-    // Setup open earable manager.
+    // After successful connection, you may reset the flag
+    isConnecting = false;
+
     await OpenEarableManager.shared.setup(device);
 
     debugPrint('${device.localName} found! rssi: ${result.rssi}');
     emit(
         bluetoothConnectionState.BluetoothConnectionState.loaded(device, true));
     debugPrint(
-        'hereeeee ${await OpenEarableManager.shared.getDeviceIdentifier()}');
+        'device Identifier: ${await OpenEarableManager.shared.getDeviceIdentifier()}');
   }
 
-  void checkout() async {
+  Future<void> checkout() async {
     debugPrint(
-      'checkout services/characteristics for device: ${device.localName}',
-    );
-    Stream<List<int>> dataStream = await OpenEarableManager.shared
+        'checkout services/characteristics for device: ${device.localName}');
+    Stream<OESensorDataPacket> dataStream = await OpenEarableManager.shared
         .startDataStream(OEDataConfig(0, 32, 100));
-    dataStream.listen(
-      (event) {
-        debugPrint('data: $event');
-      },
-    );
+    dataStream.listen((event) {
+      debugPrint('data: $event');
+    });
   }
 
-  void stopObserving() async {
+  Future<void> stopObserving() async {
     await device.disconnect();
+
+    // You may also reset the flag here if the device gets disconnected
+    isConnecting = false;
+
     await FlutterBluePlus.stopScan();
     emit(const bluetoothConnectionState.BluetoothConnectionState.loaded(
         null, false));

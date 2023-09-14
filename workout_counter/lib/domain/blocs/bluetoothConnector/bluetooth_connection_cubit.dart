@@ -26,7 +26,8 @@ class BluetoothConnectionCubit
     bluetoothDevices = FlutterBluePlus.scanResults.listen(
       (results) {
         for (ScanResult r in results) {
-          if (r.device.localName.contains('Earable')) {
+          if (r.device.localName.contains('Earable') ||
+              r.device.localName.contains('NANO-')) {
             if (isConnecting) {
               // Check if already connecting
               return;
@@ -61,10 +62,31 @@ class BluetoothConnectionCubit
   Future<void> checkout() async {
     debugPrint(
         'checkout services/characteristics for device: ${device.localName}');
-    Stream<OESensorDataPacket> dataStream = await OpenEarableManager.shared
-        .startDataStream(OEDataConfig(0, 32, 100));
+    Stream<OESensorDataPacket> dataStream =
+        await OpenEarableManager.shared.startDataStream(OEDataConfig(0, 32, 0));
+    double threshold = 40; // Just an example value
+    double lastValue = 0;
+    int pushupCount = 0;
+    bool isGoingUp = false;
+
     dataStream.listen((event) {
-      debugPrint('data: $event');
+      OESensorDataPacket packet = event;
+      debugPrint('data: ${packet.data}');
+      double zValue = packet.data['acc_z'];
+
+      if (zValue > lastValue + threshold) {
+        if (!isGoingUp) {
+          isGoingUp = true;
+        }
+      } else if (zValue < lastValue - threshold) {
+        if (isGoingUp) {
+          isGoingUp = false;
+          pushupCount++;
+        }
+      }
+
+      lastValue = zValue;
+      debugPrint('Push-up count: $pushupCount');
     });
   }
 

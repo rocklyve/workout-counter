@@ -7,6 +7,8 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:open_earable/domain/open_earable_sensor_data_packet.dart';
 import 'package:open_earable/open_earable_exception.dart';
 
+import 'domain/open_earable_ble_characteristics.dart';
+import 'domain/open_earable_ble_services.dart';
 import 'domain/open_earable_data_config.dart';
 
 class OpenEarableManager {
@@ -30,33 +32,36 @@ class OpenEarableManager {
     deviceServices = await device.discoverServices();
   }
 
-  // service 1 -> 45622510-6468-465a-b141-0b9b0f96b468 deviceInfoService
-  //              45622511-6468-465a-b141-0b9b0f96b468 deviceIdentifierCharacteristic / deviceGenerationCharacteristic
-  //              45622512-6468-465a-b141-0b9b0f96b468 deviceIdentifierCharacteristic / deviceGenerationCharacteristic
-
-  // service 2 -> 34c2e3bb-34aa-11eb-adc1-0242ac120002 sensorService
-  //              34c2e3bc-34aa-11eb-adc1-0242ac120002 sensorDataCharacteristic
-  //              34c2e3bd-34aa-11eb-adc1-0242ac120002 sensorConfigCharacteristic
-
-  // sensorDataCharactereistic
-  // uuid:        34c2e3bc-34aa-11eb-adc1-0242ac120002
-
   Future<String> getDeviceIdentifier() async {
     _guard();
     BluetoothService? deviceInfoService = deviceServices
-        ?.where((element) =>
-            element.uuid.toString() ==
-            '45622510-6468-465a-b141-0b9b0f96b468') // deviceInfoService
+        ?.where((element) => element.uuid.toString() == oEDeviceInfoServiceUUID)
         .first;
 
     BluetoothCharacteristic? deviceIdentifierCharacteristic = deviceInfoService
         ?.characteristics
         ?.where((element) =>
-            element.uuid.toString() ==
-            '45622511-6468-465a-b141-0b9b0f96b468') // deviceIdentifierCharacteristic / deviceGenerationCharacteristic
+            element.uuid.toString() == oEDeviceIdentifierCharacteristicUUID)
         .first;
 
     List<int>? value = await deviceIdentifierCharacteristic?.read();
+    BluetoothService? deviceGenService = deviceServices
+        ?.where((element) =>
+            element.uuid.toString() ==
+            '45622510-6468-465a-b141-0b9b0f96b468') // deviceInfoService
+        .first;
+
+    BluetoothCharacteristic? deviceGenCharacteristic = deviceGenService
+        ?.characteristics
+        ?.where((element) =>
+            element.uuid.toString() ==
+            '45622512-6468-465a-b141-0b9b0f96b468') // deviceIdentifierCharacteristic / deviceGenerationCharacteristic
+        .first;
+
+    List<int>? value2 = await deviceGenCharacteristic?.read();
+    // value2 to string
+    String value2String = String.fromCharCodes(value2!);
+    print('Generation: $value2String');
     return value.toString();
   }
 
@@ -128,8 +133,6 @@ class OpenEarableManager {
     sensorDataCharacteristic?.onValueReceived.listen(
       (value) {
         try {
-          print("Received bytes: ${value.toList()}");
-
           // Use the OESensorDataPacket class to unpack the data
           OESensorDataPacket packet =
               OESensorDataPacket.fromBytes(Uint8List.fromList(value));

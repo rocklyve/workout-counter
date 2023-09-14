@@ -13,31 +13,31 @@ class OESensorDataPacket {
       throw Exception("Invalid packet size.");
     }
 
-    this.sensorId = byteData.getUint8(0);
+    sensorId = byteData.getUint8(0);
 
-    this.millis = byteData.getUint32(1, Endian.little);
+    millis = byteData.getUint32(1, Endian.little);
 
-    this.data = {};
+    data = {};
 
     // IMU data starts at byte index 5
-    if (this.sensorId == 0) {
+    if (sensorId == 0) {
       // Since we don't have the size, we need to ensure we have enough data
       if (bytes.length >= 5 + 36) {
         // 5 (header bytes) + 9 * 4 (floats) = 41 bytes
-        this.data['acc_x'] = byteData.getFloat32(5, Endian.little);
-        this.data['acc_y'] = byteData.getFloat32(9, Endian.little);
-        this.data['acc_z'] = byteData.getFloat32(13, Endian.little);
-        this.data['gyro_x'] = byteData.getFloat32(17, Endian.little);
-        this.data['gyro_y'] = byteData.getFloat32(21, Endian.little);
-        this.data['gyro_z'] = byteData.getFloat32(25, Endian.little);
-        this.data['mag_x'] = byteData.getFloat32(29, Endian.little);
-        this.data['mag_y'] = byteData.getFloat32(33, Endian.little);
-        this.data['mag_z'] = byteData.getFloat32(37, Endian.little);
+        data['acc_x'] = byteData.getFloat32(5, Endian.little);
+        data['acc_y'] = byteData.getFloat32(9, Endian.little);
+        data['acc_z'] = byteData.getFloat32(13, Endian.little);
+        data['gyro_x'] = byteData.getFloat32(17, Endian.little);
+        data['gyro_y'] = byteData.getFloat32(21, Endian.little);
+        data['gyro_z'] = byteData.getFloat32(25, Endian.little);
+        data['mag_x'] = byteData.getFloat32(29, Endian.little);
+        data['mag_y'] = byteData.getFloat32(33, Endian.little);
+        data['mag_z'] = byteData.getFloat32(37, Endian.little);
       } else {
         print("Invalid IMU packet size: ${bytes.length}");
       }
     } else {
-      print("Unknown sensor ID: ${this.sensorId}");
+      print("Unknown sensor ID: $sensorId");
     }
   }
 

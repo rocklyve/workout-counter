@@ -45,64 +45,54 @@ class OpenEarableManager {
         .first;
 
     List<int>? value = await deviceIdentifierCharacteristic?.read();
+
+    String generationString = await getDeviceGeneration();
+    print('Generation: $generationString');
+
+    return value.toString();
+  }
+
+  Future<String> getDeviceGeneration() async {
     BluetoothService? deviceGenService = deviceServices
-        ?.where((element) =>
-            element.uuid.toString() ==
-            '45622510-6468-465a-b141-0b9b0f96b468') // deviceInfoService
+        ?.where((element) => element.uuid.toString() == oEDeviceInfoServiceUUID)
         .first;
 
     BluetoothCharacteristic? deviceGenCharacteristic = deviceGenService
         ?.characteristics
         ?.where((element) =>
-            element.uuid.toString() ==
-            '45622512-6468-465a-b141-0b9b0f96b468') // deviceIdentifierCharacteristic / deviceGenerationCharacteristic
+            element.uuid.toString() == oEDeviceGenerationCharacteristicUUID)
         .first;
 
-    List<int>? value2 = await deviceGenCharacteristic?.read();
+    List<int>? generationRawValue = await deviceGenCharacteristic?.read();
     // value2 to string
-    String value2String = String.fromCharCodes(value2!);
-    print('Generation: $value2String');
-    return value.toString();
+    String generationRawValueString =
+        String.fromCharCodes(generationRawValue ?? []);
+
+    return generationRawValueString;
   }
 
   Future<Stream<OESensorDataPacket>> startDataStream(
       OEDataConfig config) async {
-    print("start data stream");
-    // fetch characteristic with given OECharacteristic
+    // First initialize the sensor service and characteristics
     BluetoothService? sensorService = deviceServices
-        ?.where((element) =>
-            element.uuid.toString() ==
-            '34c2e3bb-34aa-11eb-adc1-0242ac120002') // sensorService
+        ?.where((element) => element.uuid.toString() == oESensorServiceUUID)
         .first;
 
     BluetoothCharacteristic? sensorDataCharacteristic = sensorService
         ?.characteristics
         ?.where((element) =>
-            element.uuid.toString() ==
-            '34c2e3bc-34aa-11eb-adc1-0242ac120002') // sensorDataCharacteristic
+            element.uuid.toString() == oESensorDataCharacteristicUUID)
         .first;
 
     BluetoothCharacteristic? sensorConfigCharacteristic = sensorService
         ?.characteristics
         ?.where((element) =>
-            element.uuid.toString() ==
-            '34c2e3bd-34aa-11eb-adc1-0242ac120002') // sensorConfigCharacteristic
+            element.uuid.toString() == oESensorConfigCharacteristicUUID)
         .first;
 
-    // set config for data stream
-    print('write config for data');
-
+    // Now we can send the configuration packet to the BLE device
     try {
-      List<int> configPacket = List<int>.filled(9, 0);
-      configPacket[0] = config.sensorId;
-
-      // Pack sampleRate as 4 bytes (float)
-      Uint8List sampleRateBytes = floatToBytes(config.sampleRate);
-      configPacket.setRange(1, 5, sampleRateBytes);
-
-      // Pack latency as 4 bytes (uint32_t)
-      Uint8List latencyBytes = intToBytes(config.latency);
-      configPacket.setRange(5, 9, latencyBytes);
+      List<int> configPacket = _buildConfigPacket(config);
 
       if (sensorConfigCharacteristic != null) {
         if (sensorConfigCharacteristic.properties.writeWithoutResponse) {
@@ -118,22 +108,14 @@ class OpenEarableManager {
     } catch (e) {
       print('Error sending configuration packet: $e');
     }
-    // In this code, we pack the sampleRate and latency values into their respective byte representations before sending them in the configPacket. This should ensure that the data sent to the BLE device matches the expected format defined in the Arduino code.
 
-    // List<int>? list = await sensorDataCharacteristic?.read();
-    // print('read data');
-    // print(list);
     await sensorDataCharacteristic?.setNotifyValue(true);
-    print('set notify value set');
     StreamController<OESensorDataPacket> sensorDataController =
         StreamController<OESensorDataPacket>();
-
-    // Handle the case when bluetoothSensorDataCharacteristic is null
 
     sensorDataCharacteristic?.onValueReceived.listen(
       (value) {
         try {
-          // Use the OESensorDataPacket class to unpack the data
           OESensorDataPacket packet =
               OESensorDataPacket.fromBytes(Uint8List.fromList(value));
           sensorDataController.add(packet);
@@ -144,6 +126,21 @@ class OpenEarableManager {
     );
 
     return sensorDataController.stream;
+  }
+
+  List<int> _buildConfigPacket(OEDataConfig config) {
+    List<int> configPacket = List<int>.filled(9, 0);
+    configPacket[0] = config.sensorId;
+
+    // Pack sampleRate as 4 bytes (float)
+    Uint8List sampleRateBytes = floatToBytes(config.sampleRate);
+    configPacket.setRange(1, 5, sampleRateBytes);
+
+    // Pack latency as 4 bytes (uint32_t)
+    Uint8List latencyBytes = intToBytes(config.latency);
+    configPacket.setRange(5, 9, latencyBytes);
+
+    return configPacket;
   }
 
   Uint8List floatToBytes(double value) {

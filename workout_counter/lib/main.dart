@@ -10,42 +10,34 @@ import 'package:workout_counter/utils/print.dart';
 
 import 'environment_data.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  const environment = EnvironmentData(
-    appTitle: 'Workout Counter',
-    appVersion: '1.0',
-  );
-
-  await runMain(environment);
-}
-
-Future<void> runMain(EnvironmentData environment) async {
-  // Debug printing.
-  debugPrint = kDebugMode ? debugPrintThrottled : debugPrintNoOp;
-
-  // Debug tools.
-  if (kDebugMode) {
-    EquatableConfig.stringify = true;
-  }
-
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
-
-  // final database = Database();
-  // await database.open(filename: environment.databasePath);
-
-  // App execution
+void main() {
   runZonedGuarded<void>(
-    () => runApp(
-      Environment(
-        data: environment,
-        child: const App(),
-      ),
-    ),
-    dartErrorToDebugPrint,
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+
+      const environment = EnvironmentData(
+        appTitle: 'Workout Counter',
+        appVersion: '1.0',
+      );
+
+      if (kDebugMode) {
+        EquatableConfig.stringify = true;
+      }
+
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]);
+
+      // Initialize other services if needed
+
+      runApp(
+        Environment(
+          data: environment,
+          child: const App(),
+        ),
+      );
+    },
+    (error, stack) => print(error), // Replace with your error handling logic
     zoneSpecification: const ZoneSpecification(
       print: kDebugMode ? null : zonePrintNoOp,
     ),

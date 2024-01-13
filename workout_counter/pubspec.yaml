@@ -37,6 +37,7 @@ dependencies:
   equatable: ^2.0.5
   sqflite: ^2.2.0+3
   dart_code_metrics: ^5.0.1
+  flutter_reactive_ble: ^5.2.0
   open_earable_flutter:
     path: packages/open_earable_flutter
   fl_chart: ^0.63.0

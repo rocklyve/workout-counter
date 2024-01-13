@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'bluetooth_connection_state.freezed.dart';
@@ -11,7 +11,7 @@ class BluetoothConnectionState with _$BluetoothConnectionState {
   const factory BluetoothConnectionState.loading() = BluetoothConnectionStateLoading;
 
   const factory BluetoothConnectionState.loaded(
-    BluetoothDevice? device,
+    DiscoveredDevice? device,
     bool isConnected,
   ) = BluetoothConnectionStateLoaded;
 

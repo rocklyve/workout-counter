@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_counter/domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
@@ -24,13 +23,16 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
-                  onPressed: () => context.read<BluetoothConnectionCubit>().startObserving(),
+                  onPressed: () {
+                    print('start search');
+                    context.read<BluetoothConnectionCubit>().startObserving();
+                  },
                   child: const Text('Start Search'),
                 ),
                 const SizedBox(height: 10),
                 if (state is BluetoothConnectionStateLoaded)
                   Text(
-                    state.isConnected ? '${state.device?.localName ?? 'Unknown device'} is connected' : 'not connected',
+                    state.isConnected ? '${state.device?.name ?? 'Unknown device'} is connected' : 'not connected',
                     style: TextStyle(
                       color: state.isConnected ? Colors.green : Colors.red,
                       fontSize: 16,

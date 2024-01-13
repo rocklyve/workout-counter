@@ -20,7 +20,8 @@ mixin _$BluetoothConnectionState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(BluetoothDevice? device, bool isConnected) loaded,
+    required TResult Function(DiscoveredDevice? device, bool isConnected)
+        loaded,
     required TResult Function(dynamic error) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +29,7 @@ mixin _$BluetoothConnectionState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(BluetoothDevice? device, bool isConnected)? loaded,
+    TResult? Function(DiscoveredDevice? device, bool isConnected)? loaded,
     TResult? Function(dynamic error)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +37,7 @@ mixin _$BluetoothConnectionState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(BluetoothDevice? device, bool isConnected)? loaded,
+    TResult Function(DiscoveredDevice? device, bool isConnected)? loaded,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) =>
@@ -88,30 +89,30 @@ class _$BluetoothConnectionStateCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$BluetoothConnectionStateInitialCopyWith<$Res> {
-  factory _$$BluetoothConnectionStateInitialCopyWith(
-          _$BluetoothConnectionStateInitial value,
-          $Res Function(_$BluetoothConnectionStateInitial) then) =
-      __$$BluetoothConnectionStateInitialCopyWithImpl<$Res>;
+abstract class _$$BluetoothConnectionStateInitialImplCopyWith<$Res> {
+  factory _$$BluetoothConnectionStateInitialImplCopyWith(
+          _$BluetoothConnectionStateInitialImpl value,
+          $Res Function(_$BluetoothConnectionStateInitialImpl) then) =
+      __$$BluetoothConnectionStateInitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$BluetoothConnectionStateInitialCopyWithImpl<$Res>
+class __$$BluetoothConnectionStateInitialImplCopyWithImpl<$Res>
     extends _$BluetoothConnectionStateCopyWithImpl<$Res,
-        _$BluetoothConnectionStateInitial>
-    implements _$$BluetoothConnectionStateInitialCopyWith<$Res> {
-  __$$BluetoothConnectionStateInitialCopyWithImpl(
-      _$BluetoothConnectionStateInitial _value,
-      $Res Function(_$BluetoothConnectionStateInitial) _then)
+        _$BluetoothConnectionStateInitialImpl>
+    implements _$$BluetoothConnectionStateInitialImplCopyWith<$Res> {
+  __$$BluetoothConnectionStateInitialImplCopyWithImpl(
+      _$BluetoothConnectionStateInitialImpl _value,
+      $Res Function(_$BluetoothConnectionStateInitialImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$BluetoothConnectionStateInitial
+class _$BluetoothConnectionStateInitialImpl
     with DiagnosticableTreeMixin
     implements BluetoothConnectionStateInitial {
-  const _$BluetoothConnectionStateInitial();
+  const _$BluetoothConnectionStateInitialImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -126,10 +127,10 @@ class _$BluetoothConnectionStateInitial
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothConnectionStateInitial);
+            other is _$BluetoothConnectionStateInitialImpl);
   }
 
   @override
@@ -140,7 +141,8 @@ class _$BluetoothConnectionStateInitial
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(BluetoothDevice? device, bool isConnected) loaded,
+    required TResult Function(DiscoveredDevice? device, bool isConnected)
+        loaded,
     required TResult Function(dynamic error) error,
   }) {
     return initial();
@@ -151,7 +153,7 @@ class _$BluetoothConnectionStateInitial
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(BluetoothDevice? device, bool isConnected)? loaded,
+    TResult? Function(DiscoveredDevice? device, bool isConnected)? loaded,
     TResult? Function(dynamic error)? error,
   }) {
     return initial?.call();
@@ -162,7 +164,7 @@ class _$BluetoothConnectionStateInitial
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(BluetoothDevice? device, bool isConnected)? loaded,
+    TResult Function(DiscoveredDevice? device, bool isConnected)? loaded,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
@@ -213,34 +215,34 @@ class _$BluetoothConnectionStateInitial
 abstract class BluetoothConnectionStateInitial
     implements BluetoothConnectionState {
   const factory BluetoothConnectionStateInitial() =
-      _$BluetoothConnectionStateInitial;
+      _$BluetoothConnectionStateInitialImpl;
 }
 
 /// @nodoc
-abstract class _$$BluetoothConnectionStateLoadingCopyWith<$Res> {
-  factory _$$BluetoothConnectionStateLoadingCopyWith(
-          _$BluetoothConnectionStateLoading value,
-          $Res Function(_$BluetoothConnectionStateLoading) then) =
-      __$$BluetoothConnectionStateLoadingCopyWithImpl<$Res>;
+abstract class _$$BluetoothConnectionStateLoadingImplCopyWith<$Res> {
+  factory _$$BluetoothConnectionStateLoadingImplCopyWith(
+          _$BluetoothConnectionStateLoadingImpl value,
+          $Res Function(_$BluetoothConnectionStateLoadingImpl) then) =
+      __$$BluetoothConnectionStateLoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$BluetoothConnectionStateLoadingCopyWithImpl<$Res>
+class __$$BluetoothConnectionStateLoadingImplCopyWithImpl<$Res>
     extends _$BluetoothConnectionStateCopyWithImpl<$Res,
-        _$BluetoothConnectionStateLoading>
-    implements _$$BluetoothConnectionStateLoadingCopyWith<$Res> {
-  __$$BluetoothConnectionStateLoadingCopyWithImpl(
-      _$BluetoothConnectionStateLoading _value,
-      $Res Function(_$BluetoothConnectionStateLoading) _then)
+        _$BluetoothConnectionStateLoadingImpl>
+    implements _$$BluetoothConnectionStateLoadingImplCopyWith<$Res> {
+  __$$BluetoothConnectionStateLoadingImplCopyWithImpl(
+      _$BluetoothConnectionStateLoadingImpl _value,
+      $Res Function(_$BluetoothConnectionStateLoadingImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$BluetoothConnectionStateLoading
+class _$BluetoothConnectionStateLoadingImpl
     with DiagnosticableTreeMixin
     implements BluetoothConnectionStateLoading {
-  const _$BluetoothConnectionStateLoading();
+  const _$BluetoothConnectionStateLoadingImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -255,10 +257,10 @@ class _$BluetoothConnectionStateLoading
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothConnectionStateLoading);
+            other is _$BluetoothConnectionStateLoadingImpl);
   }
 
   @override
@@ -269,7 +271,8 @@ class _$BluetoothConnectionStateLoading
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(BluetoothDevice? device, bool isConnected) loaded,
+    required TResult Function(DiscoveredDevice? device, bool isConnected)
+        loaded,
     required TResult Function(dynamic error) error,
   }) {
     return loading();
@@ -280,7 +283,7 @@ class _$BluetoothConnectionStateLoading
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(BluetoothDevice? device, bool isConnected)? loaded,
+    TResult? Function(DiscoveredDevice? device, bool isConnected)? loaded,
     TResult? Function(dynamic error)? error,
   }) {
     return loading?.call();
@@ -291,7 +294,7 @@ class _$BluetoothConnectionStateLoading
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(BluetoothDevice? device, bool isConnected)? loaded,
+    TResult Function(DiscoveredDevice? device, bool isConnected)? loaded,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
@@ -342,27 +345,27 @@ class _$BluetoothConnectionStateLoading
 abstract class BluetoothConnectionStateLoading
     implements BluetoothConnectionState {
   const factory BluetoothConnectionStateLoading() =
-      _$BluetoothConnectionStateLoading;
+      _$BluetoothConnectionStateLoadingImpl;
 }
 
 /// @nodoc
-abstract class _$$BluetoothConnectionStateLoadedCopyWith<$Res> {
-  factory _$$BluetoothConnectionStateLoadedCopyWith(
-          _$BluetoothConnectionStateLoaded value,
-          $Res Function(_$BluetoothConnectionStateLoaded) then) =
-      __$$BluetoothConnectionStateLoadedCopyWithImpl<$Res>;
+abstract class _$$BluetoothConnectionStateLoadedImplCopyWith<$Res> {
+  factory _$$BluetoothConnectionStateLoadedImplCopyWith(
+          _$BluetoothConnectionStateLoadedImpl value,
+          $Res Function(_$BluetoothConnectionStateLoadedImpl) then) =
+      __$$BluetoothConnectionStateLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({BluetoothDevice? device, bool isConnected});
+  $Res call({DiscoveredDevice? device, bool isConnected});
 }
 
 /// @nodoc
-class __$$BluetoothConnectionStateLoadedCopyWithImpl<$Res>
+class __$$BluetoothConnectionStateLoadedImplCopyWithImpl<$Res>
     extends _$BluetoothConnectionStateCopyWithImpl<$Res,
-        _$BluetoothConnectionStateLoaded>
-    implements _$$BluetoothConnectionStateLoadedCopyWith<$Res> {
-  __$$BluetoothConnectionStateLoadedCopyWithImpl(
-      _$BluetoothConnectionStateLoaded _value,
-      $Res Function(_$BluetoothConnectionStateLoaded) _then)
+        _$BluetoothConnectionStateLoadedImpl>
+    implements _$$BluetoothConnectionStateLoadedImplCopyWith<$Res> {
+  __$$BluetoothConnectionStateLoadedImplCopyWithImpl(
+      _$BluetoothConnectionStateLoadedImpl _value,
+      $Res Function(_$BluetoothConnectionStateLoadedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -371,11 +374,11 @@ class __$$BluetoothConnectionStateLoadedCopyWithImpl<$Res>
     Object? device = freezed,
     Object? isConnected = null,
   }) {
-    return _then(_$BluetoothConnectionStateLoaded(
+    return _then(_$BluetoothConnectionStateLoadedImpl(
       freezed == device
           ? _value.device
           : device // ignore: cast_nullable_to_non_nullable
-              as BluetoothDevice?,
+              as DiscoveredDevice?,
       null == isConnected
           ? _value.isConnected
           : isConnected // ignore: cast_nullable_to_non_nullable
@@ -386,13 +389,13 @@ class __$$BluetoothConnectionStateLoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothConnectionStateLoaded
+class _$BluetoothConnectionStateLoadedImpl
     with DiagnosticableTreeMixin
     implements BluetoothConnectionStateLoaded {
-  const _$BluetoothConnectionStateLoaded(this.device, this.isConnected);
+  const _$BluetoothConnectionStateLoadedImpl(this.device, this.isConnected);
 
   @override
-  final BluetoothDevice? device;
+  final DiscoveredDevice? device;
   @override
   final bool isConnected;
 
@@ -411,10 +414,10 @@ class _$BluetoothConnectionStateLoaded
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothConnectionStateLoaded &&
+            other is _$BluetoothConnectionStateLoadedImpl &&
             (identical(other.device, device) || other.device == device) &&
             (identical(other.isConnected, isConnected) ||
                 other.isConnected == isConnected));
@@ -426,16 +429,18 @@ class _$BluetoothConnectionStateLoaded
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BluetoothConnectionStateLoadedCopyWith<_$BluetoothConnectionStateLoaded>
-      get copyWith => __$$BluetoothConnectionStateLoadedCopyWithImpl<
-          _$BluetoothConnectionStateLoaded>(this, _$identity);
+  _$$BluetoothConnectionStateLoadedImplCopyWith<
+          _$BluetoothConnectionStateLoadedImpl>
+      get copyWith => __$$BluetoothConnectionStateLoadedImplCopyWithImpl<
+          _$BluetoothConnectionStateLoadedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(BluetoothDevice? device, bool isConnected) loaded,
+    required TResult Function(DiscoveredDevice? device, bool isConnected)
+        loaded,
     required TResult Function(dynamic error) error,
   }) {
     return loaded(device, isConnected);
@@ -446,7 +451,7 @@ class _$BluetoothConnectionStateLoaded
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(BluetoothDevice? device, bool isConnected)? loaded,
+    TResult? Function(DiscoveredDevice? device, bool isConnected)? loaded,
     TResult? Function(dynamic error)? error,
   }) {
     return loaded?.call(device, isConnected);
@@ -457,7 +462,7 @@ class _$BluetoothConnectionStateLoaded
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(BluetoothDevice? device, bool isConnected)? loaded,
+    TResult Function(DiscoveredDevice? device, bool isConnected)? loaded,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
@@ -508,34 +513,35 @@ class _$BluetoothConnectionStateLoaded
 abstract class BluetoothConnectionStateLoaded
     implements BluetoothConnectionState {
   const factory BluetoothConnectionStateLoaded(
-          final BluetoothDevice? device, final bool isConnected) =
-      _$BluetoothConnectionStateLoaded;
+          final DiscoveredDevice? device, final bool isConnected) =
+      _$BluetoothConnectionStateLoadedImpl;
 
-  BluetoothDevice? get device;
+  DiscoveredDevice? get device;
   bool get isConnected;
   @JsonKey(ignore: true)
-  _$$BluetoothConnectionStateLoadedCopyWith<_$BluetoothConnectionStateLoaded>
+  _$$BluetoothConnectionStateLoadedImplCopyWith<
+          _$BluetoothConnectionStateLoadedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$BluetoothConnectionStateErrorCopyWith<$Res> {
-  factory _$$BluetoothConnectionStateErrorCopyWith(
-          _$BluetoothConnectionStateError value,
-          $Res Function(_$BluetoothConnectionStateError) then) =
-      __$$BluetoothConnectionStateErrorCopyWithImpl<$Res>;
+abstract class _$$BluetoothConnectionStateErrorImplCopyWith<$Res> {
+  factory _$$BluetoothConnectionStateErrorImplCopyWith(
+          _$BluetoothConnectionStateErrorImpl value,
+          $Res Function(_$BluetoothConnectionStateErrorImpl) then) =
+      __$$BluetoothConnectionStateErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({dynamic error});
 }
 
 /// @nodoc
-class __$$BluetoothConnectionStateErrorCopyWithImpl<$Res>
+class __$$BluetoothConnectionStateErrorImplCopyWithImpl<$Res>
     extends _$BluetoothConnectionStateCopyWithImpl<$Res,
-        _$BluetoothConnectionStateError>
-    implements _$$BluetoothConnectionStateErrorCopyWith<$Res> {
-  __$$BluetoothConnectionStateErrorCopyWithImpl(
-      _$BluetoothConnectionStateError _value,
-      $Res Function(_$BluetoothConnectionStateError) _then)
+        _$BluetoothConnectionStateErrorImpl>
+    implements _$$BluetoothConnectionStateErrorImplCopyWith<$Res> {
+  __$$BluetoothConnectionStateErrorImplCopyWithImpl(
+      _$BluetoothConnectionStateErrorImpl _value,
+      $Res Function(_$BluetoothConnectionStateErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -543,7 +549,7 @@ class __$$BluetoothConnectionStateErrorCopyWithImpl<$Res>
   $Res call({
     Object? error = freezed,
   }) {
-    return _then(_$BluetoothConnectionStateError(
+    return _then(_$BluetoothConnectionStateErrorImpl(
       error: freezed == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -554,10 +560,10 @@ class __$$BluetoothConnectionStateErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$BluetoothConnectionStateError
+class _$BluetoothConnectionStateErrorImpl
     with DiagnosticableTreeMixin
     implements BluetoothConnectionStateError {
-  const _$BluetoothConnectionStateError({required this.error});
+  const _$BluetoothConnectionStateErrorImpl({required this.error});
 
   @override
   final dynamic error;
@@ -576,10 +582,10 @@ class _$BluetoothConnectionStateError
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothConnectionStateError &&
+            other is _$BluetoothConnectionStateErrorImpl &&
             const DeepCollectionEquality().equals(other.error, error));
   }
 
@@ -590,16 +596,18 @@ class _$BluetoothConnectionStateError
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$BluetoothConnectionStateErrorCopyWith<_$BluetoothConnectionStateError>
-      get copyWith => __$$BluetoothConnectionStateErrorCopyWithImpl<
-          _$BluetoothConnectionStateError>(this, _$identity);
+  _$$BluetoothConnectionStateErrorImplCopyWith<
+          _$BluetoothConnectionStateErrorImpl>
+      get copyWith => __$$BluetoothConnectionStateErrorImplCopyWithImpl<
+          _$BluetoothConnectionStateErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(BluetoothDevice? device, bool isConnected) loaded,
+    required TResult Function(DiscoveredDevice? device, bool isConnected)
+        loaded,
     required TResult Function(dynamic error) error,
   }) {
     return error(this.error);
@@ -610,7 +618,7 @@ class _$BluetoothConnectionStateError
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(BluetoothDevice? device, bool isConnected)? loaded,
+    TResult? Function(DiscoveredDevice? device, bool isConnected)? loaded,
     TResult? Function(dynamic error)? error,
   }) {
     return error?.call(this.error);
@@ -621,7 +629,7 @@ class _$BluetoothConnectionStateError
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(BluetoothDevice? device, bool isConnected)? loaded,
+    TResult Function(DiscoveredDevice? device, bool isConnected)? loaded,
     TResult Function(dynamic error)? error,
     required TResult orElse(),
   }) {
@@ -672,10 +680,11 @@ class _$BluetoothConnectionStateError
 abstract class BluetoothConnectionStateError
     implements BluetoothConnectionState {
   const factory BluetoothConnectionStateError({required final dynamic error}) =
-      _$BluetoothConnectionStateError;
+      _$BluetoothConnectionStateErrorImpl;
 
   dynamic get error;
   @JsonKey(ignore: true)
-  _$$BluetoothConnectionStateErrorCopyWith<_$BluetoothConnectionStateError>
+  _$$BluetoothConnectionStateErrorImplCopyWith<
+          _$BluetoothConnectionStateErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

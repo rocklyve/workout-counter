@@ -19,50 +19,74 @@ mixin _$BluetoothConnectionState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(DiscoveredDevice? device, bool isConnected)
-        loaded,
-    required TResult Function(dynamic error) error,
+    required TResult Function(List<DiscoveredDevice> devices) observing,
+    required TResult Function() connecting,
+    required TResult Function() connected,
+    required TResult Function() disconnecting,
+    required TResult Function() disconnected,
+    required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(DiscoveredDevice? device, bool isConnected)? loaded,
-    TResult? Function(dynamic error)? error,
+    TResult? Function(List<DiscoveredDevice> devices)? observing,
+    TResult? Function()? connecting,
+    TResult? Function()? connected,
+    TResult? Function()? disconnecting,
+    TResult? Function()? disconnected,
+    TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(DiscoveredDevice? device, bool isConnected)? loaded,
-    TResult Function(dynamic error)? error,
+    TResult Function(List<DiscoveredDevice> devices)? observing,
+    TResult Function()? connecting,
+    TResult Function()? connected,
+    TResult Function()? disconnecting,
+    TResult Function()? disconnected,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BluetoothConnectionStateInitial value) initial,
-    required TResult Function(BluetoothConnectionStateLoading value) loading,
-    required TResult Function(BluetoothConnectionStateLoaded value) loaded,
+    required TResult Function(BluetoothConnectionStateObserving value)
+        observing,
+    required TResult Function(BluetoothConnectionStateConnecting value)
+        connecting,
+    required TResult Function(BluetoothConnectionStateConnected value)
+        connected,
+    required TResult Function(BluetoothConnectionStateDisconnecting value)
+        disconnecting,
+    required TResult Function(BluetoothConnectionStateDisconnected value)
+        disconnected,
     required TResult Function(BluetoothConnectionStateError value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BluetoothConnectionStateInitial value)? initial,
-    TResult? Function(BluetoothConnectionStateLoading value)? loading,
-    TResult? Function(BluetoothConnectionStateLoaded value)? loaded,
+    TResult? Function(BluetoothConnectionStateObserving value)? observing,
+    TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
     TResult? Function(BluetoothConnectionStateError value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BluetoothConnectionStateInitial value)? initial,
-    TResult Function(BluetoothConnectionStateLoading value)? loading,
-    TResult Function(BluetoothConnectionStateLoaded value)? loaded,
+    TResult Function(BluetoothConnectionStateObserving value)? observing,
+    TResult Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
     TResult Function(BluetoothConnectionStateError value)? error,
     required TResult orElse(),
   }) =>
@@ -140,10 +164,12 @@ class _$BluetoothConnectionStateInitialImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(DiscoveredDevice? device, bool isConnected)
-        loaded,
-    required TResult Function(dynamic error) error,
+    required TResult Function(List<DiscoveredDevice> devices) observing,
+    required TResult Function() connecting,
+    required TResult Function() connected,
+    required TResult Function() disconnecting,
+    required TResult Function() disconnected,
+    required TResult Function(String message) error,
   }) {
     return initial();
   }
@@ -152,9 +178,12 @@ class _$BluetoothConnectionStateInitialImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(DiscoveredDevice? device, bool isConnected)? loaded,
-    TResult? Function(dynamic error)? error,
+    TResult? Function(List<DiscoveredDevice> devices)? observing,
+    TResult? Function()? connecting,
+    TResult? Function()? connected,
+    TResult? Function()? disconnecting,
+    TResult? Function()? disconnected,
+    TResult? Function(String message)? error,
   }) {
     return initial?.call();
   }
@@ -163,9 +192,12 @@ class _$BluetoothConnectionStateInitialImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(DiscoveredDevice? device, bool isConnected)? loaded,
-    TResult Function(dynamic error)? error,
+    TResult Function(List<DiscoveredDevice> devices)? observing,
+    TResult Function()? connecting,
+    TResult Function()? connected,
+    TResult Function()? disconnecting,
+    TResult Function()? disconnected,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -178,8 +210,16 @@ class _$BluetoothConnectionStateInitialImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BluetoothConnectionStateInitial value) initial,
-    required TResult Function(BluetoothConnectionStateLoading value) loading,
-    required TResult Function(BluetoothConnectionStateLoaded value) loaded,
+    required TResult Function(BluetoothConnectionStateObserving value)
+        observing,
+    required TResult Function(BluetoothConnectionStateConnecting value)
+        connecting,
+    required TResult Function(BluetoothConnectionStateConnected value)
+        connected,
+    required TResult Function(BluetoothConnectionStateDisconnecting value)
+        disconnecting,
+    required TResult Function(BluetoothConnectionStateDisconnected value)
+        disconnected,
     required TResult Function(BluetoothConnectionStateError value) error,
   }) {
     return initial(this);
@@ -189,8 +229,12 @@ class _$BluetoothConnectionStateInitialImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BluetoothConnectionStateInitial value)? initial,
-    TResult? Function(BluetoothConnectionStateLoading value)? loading,
-    TResult? Function(BluetoothConnectionStateLoaded value)? loaded,
+    TResult? Function(BluetoothConnectionStateObserving value)? observing,
+    TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
     TResult? Function(BluetoothConnectionStateError value)? error,
   }) {
     return initial?.call(this);
@@ -200,8 +244,12 @@ class _$BluetoothConnectionStateInitialImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BluetoothConnectionStateInitial value)? initial,
-    TResult Function(BluetoothConnectionStateLoading value)? loading,
-    TResult Function(BluetoothConnectionStateLoaded value)? loaded,
+    TResult Function(BluetoothConnectionStateObserving value)? observing,
+    TResult Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
     TResult Function(BluetoothConnectionStateError value)? error,
     required TResult orElse(),
   }) {
@@ -219,48 +267,245 @@ abstract class BluetoothConnectionStateInitial
 }
 
 /// @nodoc
-abstract class _$$BluetoothConnectionStateLoadingImplCopyWith<$Res> {
-  factory _$$BluetoothConnectionStateLoadingImplCopyWith(
-          _$BluetoothConnectionStateLoadingImpl value,
-          $Res Function(_$BluetoothConnectionStateLoadingImpl) then) =
-      __$$BluetoothConnectionStateLoadingImplCopyWithImpl<$Res>;
+abstract class _$$BluetoothConnectionStateObservingImplCopyWith<$Res> {
+  factory _$$BluetoothConnectionStateObservingImplCopyWith(
+          _$BluetoothConnectionStateObservingImpl value,
+          $Res Function(_$BluetoothConnectionStateObservingImpl) then) =
+      __$$BluetoothConnectionStateObservingImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<DiscoveredDevice> devices});
 }
 
 /// @nodoc
-class __$$BluetoothConnectionStateLoadingImplCopyWithImpl<$Res>
+class __$$BluetoothConnectionStateObservingImplCopyWithImpl<$Res>
     extends _$BluetoothConnectionStateCopyWithImpl<$Res,
-        _$BluetoothConnectionStateLoadingImpl>
-    implements _$$BluetoothConnectionStateLoadingImplCopyWith<$Res> {
-  __$$BluetoothConnectionStateLoadingImplCopyWithImpl(
-      _$BluetoothConnectionStateLoadingImpl _value,
-      $Res Function(_$BluetoothConnectionStateLoadingImpl) _then)
+        _$BluetoothConnectionStateObservingImpl>
+    implements _$$BluetoothConnectionStateObservingImplCopyWith<$Res> {
+  __$$BluetoothConnectionStateObservingImplCopyWithImpl(
+      _$BluetoothConnectionStateObservingImpl _value,
+      $Res Function(_$BluetoothConnectionStateObservingImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? devices = null,
+  }) {
+    return _then(_$BluetoothConnectionStateObservingImpl(
+      devices: null == devices
+          ? _value._devices
+          : devices // ignore: cast_nullable_to_non_nullable
+              as List<DiscoveredDevice>,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$BluetoothConnectionStateLoadingImpl
+class _$BluetoothConnectionStateObservingImpl
     with DiagnosticableTreeMixin
-    implements BluetoothConnectionStateLoading {
-  const _$BluetoothConnectionStateLoadingImpl();
+    implements BluetoothConnectionStateObserving {
+  const _$BluetoothConnectionStateObservingImpl(
+      {required final List<DiscoveredDevice> devices})
+      : _devices = devices;
+
+  final List<DiscoveredDevice> _devices;
+  @override
+  List<DiscoveredDevice> get devices {
+    if (_devices is EqualUnmodifiableListView) return _devices;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_devices);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BluetoothConnectionState.loading()';
+    return 'BluetoothConnectionState.observing(devices: $devices)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-        .add(DiagnosticsProperty('type', 'BluetoothConnectionState.loading'));
+      ..add(DiagnosticsProperty('type', 'BluetoothConnectionState.observing'))
+      ..add(DiagnosticsProperty('devices', devices));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothConnectionStateLoadingImpl);
+            other is _$BluetoothConnectionStateObservingImpl &&
+            const DeepCollectionEquality().equals(other._devices, _devices));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_devices));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BluetoothConnectionStateObservingImplCopyWith<
+          _$BluetoothConnectionStateObservingImpl>
+      get copyWith => __$$BluetoothConnectionStateObservingImplCopyWithImpl<
+          _$BluetoothConnectionStateObservingImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<DiscoveredDevice> devices) observing,
+    required TResult Function() connecting,
+    required TResult Function() connected,
+    required TResult Function() disconnecting,
+    required TResult Function() disconnected,
+    required TResult Function(String message) error,
+  }) {
+    return observing(devices);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<DiscoveredDevice> devices)? observing,
+    TResult? Function()? connecting,
+    TResult? Function()? connected,
+    TResult? Function()? disconnecting,
+    TResult? Function()? disconnected,
+    TResult? Function(String message)? error,
+  }) {
+    return observing?.call(devices);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<DiscoveredDevice> devices)? observing,
+    TResult Function()? connecting,
+    TResult Function()? connected,
+    TResult Function()? disconnecting,
+    TResult Function()? disconnected,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (observing != null) {
+      return observing(devices);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BluetoothConnectionStateInitial value) initial,
+    required TResult Function(BluetoothConnectionStateObserving value)
+        observing,
+    required TResult Function(BluetoothConnectionStateConnecting value)
+        connecting,
+    required TResult Function(BluetoothConnectionStateConnected value)
+        connected,
+    required TResult Function(BluetoothConnectionStateDisconnecting value)
+        disconnecting,
+    required TResult Function(BluetoothConnectionStateDisconnected value)
+        disconnected,
+    required TResult Function(BluetoothConnectionStateError value) error,
+  }) {
+    return observing(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BluetoothConnectionStateInitial value)? initial,
+    TResult? Function(BluetoothConnectionStateObserving value)? observing,
+    TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
+    TResult? Function(BluetoothConnectionStateError value)? error,
+  }) {
+    return observing?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BluetoothConnectionStateInitial value)? initial,
+    TResult Function(BluetoothConnectionStateObserving value)? observing,
+    TResult Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
+    TResult Function(BluetoothConnectionStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (observing != null) {
+      return observing(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BluetoothConnectionStateObserving
+    implements BluetoothConnectionState {
+  const factory BluetoothConnectionStateObserving(
+          {required final List<DiscoveredDevice> devices}) =
+      _$BluetoothConnectionStateObservingImpl;
+
+  List<DiscoveredDevice> get devices;
+  @JsonKey(ignore: true)
+  _$$BluetoothConnectionStateObservingImplCopyWith<
+          _$BluetoothConnectionStateObservingImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$BluetoothConnectionStateConnectingImplCopyWith<$Res> {
+  factory _$$BluetoothConnectionStateConnectingImplCopyWith(
+          _$BluetoothConnectionStateConnectingImpl value,
+          $Res Function(_$BluetoothConnectionStateConnectingImpl) then) =
+      __$$BluetoothConnectionStateConnectingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BluetoothConnectionStateConnectingImplCopyWithImpl<$Res>
+    extends _$BluetoothConnectionStateCopyWithImpl<$Res,
+        _$BluetoothConnectionStateConnectingImpl>
+    implements _$$BluetoothConnectionStateConnectingImplCopyWith<$Res> {
+  __$$BluetoothConnectionStateConnectingImplCopyWithImpl(
+      _$BluetoothConnectionStateConnectingImpl _value,
+      $Res Function(_$BluetoothConnectionStateConnectingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$BluetoothConnectionStateConnectingImpl
+    with DiagnosticableTreeMixin
+    implements BluetoothConnectionStateConnecting {
+  const _$BluetoothConnectionStateConnectingImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BluetoothConnectionState.connecting()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'BluetoothConnectionState.connecting'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BluetoothConnectionStateConnectingImpl);
   }
 
   @override
@@ -270,36 +515,44 @@ class _$BluetoothConnectionStateLoadingImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(DiscoveredDevice? device, bool isConnected)
-        loaded,
-    required TResult Function(dynamic error) error,
+    required TResult Function(List<DiscoveredDevice> devices) observing,
+    required TResult Function() connecting,
+    required TResult Function() connected,
+    required TResult Function() disconnecting,
+    required TResult Function() disconnected,
+    required TResult Function(String message) error,
   }) {
-    return loading();
+    return connecting();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(DiscoveredDevice? device, bool isConnected)? loaded,
-    TResult? Function(dynamic error)? error,
+    TResult? Function(List<DiscoveredDevice> devices)? observing,
+    TResult? Function()? connecting,
+    TResult? Function()? connected,
+    TResult? Function()? disconnecting,
+    TResult? Function()? disconnected,
+    TResult? Function(String message)? error,
   }) {
-    return loading?.call();
+    return connecting?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(DiscoveredDevice? device, bool isConnected)? loaded,
-    TResult Function(dynamic error)? error,
+    TResult Function(List<DiscoveredDevice> devices)? observing,
+    TResult Function()? connecting,
+    TResult Function()? connected,
+    TResult Function()? disconnecting,
+    TResult Function()? disconnected,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading();
+    if (connecting != null) {
+      return connecting();
     }
     return orElse();
   }
@@ -308,166 +561,152 @@ class _$BluetoothConnectionStateLoadingImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BluetoothConnectionStateInitial value) initial,
-    required TResult Function(BluetoothConnectionStateLoading value) loading,
-    required TResult Function(BluetoothConnectionStateLoaded value) loaded,
+    required TResult Function(BluetoothConnectionStateObserving value)
+        observing,
+    required TResult Function(BluetoothConnectionStateConnecting value)
+        connecting,
+    required TResult Function(BluetoothConnectionStateConnected value)
+        connected,
+    required TResult Function(BluetoothConnectionStateDisconnecting value)
+        disconnecting,
+    required TResult Function(BluetoothConnectionStateDisconnected value)
+        disconnected,
     required TResult Function(BluetoothConnectionStateError value) error,
   }) {
-    return loading(this);
+    return connecting(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BluetoothConnectionStateInitial value)? initial,
-    TResult? Function(BluetoothConnectionStateLoading value)? loading,
-    TResult? Function(BluetoothConnectionStateLoaded value)? loaded,
+    TResult? Function(BluetoothConnectionStateObserving value)? observing,
+    TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
     TResult? Function(BluetoothConnectionStateError value)? error,
   }) {
-    return loading?.call(this);
+    return connecting?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BluetoothConnectionStateInitial value)? initial,
-    TResult Function(BluetoothConnectionStateLoading value)? loading,
-    TResult Function(BluetoothConnectionStateLoaded value)? loaded,
+    TResult Function(BluetoothConnectionStateObserving value)? observing,
+    TResult Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
     TResult Function(BluetoothConnectionStateError value)? error,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    if (connecting != null) {
+      return connecting(this);
     }
     return orElse();
   }
 }
 
-abstract class BluetoothConnectionStateLoading
+abstract class BluetoothConnectionStateConnecting
     implements BluetoothConnectionState {
-  const factory BluetoothConnectionStateLoading() =
-      _$BluetoothConnectionStateLoadingImpl;
+  const factory BluetoothConnectionStateConnecting() =
+      _$BluetoothConnectionStateConnectingImpl;
 }
 
 /// @nodoc
-abstract class _$$BluetoothConnectionStateLoadedImplCopyWith<$Res> {
-  factory _$$BluetoothConnectionStateLoadedImplCopyWith(
-          _$BluetoothConnectionStateLoadedImpl value,
-          $Res Function(_$BluetoothConnectionStateLoadedImpl) then) =
-      __$$BluetoothConnectionStateLoadedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({DiscoveredDevice? device, bool isConnected});
+abstract class _$$BluetoothConnectionStateConnectedImplCopyWith<$Res> {
+  factory _$$BluetoothConnectionStateConnectedImplCopyWith(
+          _$BluetoothConnectionStateConnectedImpl value,
+          $Res Function(_$BluetoothConnectionStateConnectedImpl) then) =
+      __$$BluetoothConnectionStateConnectedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$BluetoothConnectionStateLoadedImplCopyWithImpl<$Res>
+class __$$BluetoothConnectionStateConnectedImplCopyWithImpl<$Res>
     extends _$BluetoothConnectionStateCopyWithImpl<$Res,
-        _$BluetoothConnectionStateLoadedImpl>
-    implements _$$BluetoothConnectionStateLoadedImplCopyWith<$Res> {
-  __$$BluetoothConnectionStateLoadedImplCopyWithImpl(
-      _$BluetoothConnectionStateLoadedImpl _value,
-      $Res Function(_$BluetoothConnectionStateLoadedImpl) _then)
+        _$BluetoothConnectionStateConnectedImpl>
+    implements _$$BluetoothConnectionStateConnectedImplCopyWith<$Res> {
+  __$$BluetoothConnectionStateConnectedImplCopyWithImpl(
+      _$BluetoothConnectionStateConnectedImpl _value,
+      $Res Function(_$BluetoothConnectionStateConnectedImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? device = freezed,
-    Object? isConnected = null,
-  }) {
-    return _then(_$BluetoothConnectionStateLoadedImpl(
-      freezed == device
-          ? _value.device
-          : device // ignore: cast_nullable_to_non_nullable
-              as DiscoveredDevice?,
-      null == isConnected
-          ? _value.isConnected
-          : isConnected // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$BluetoothConnectionStateLoadedImpl
+class _$BluetoothConnectionStateConnectedImpl
     with DiagnosticableTreeMixin
-    implements BluetoothConnectionStateLoaded {
-  const _$BluetoothConnectionStateLoadedImpl(this.device, this.isConnected);
-
-  @override
-  final DiscoveredDevice? device;
-  @override
-  final bool isConnected;
+    implements BluetoothConnectionStateConnected {
+  const _$BluetoothConnectionStateConnectedImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BluetoothConnectionState.loaded(device: $device, isConnected: $isConnected)';
+    return 'BluetoothConnectionState.connected()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'BluetoothConnectionState.loaded'))
-      ..add(DiagnosticsProperty('device', device))
-      ..add(DiagnosticsProperty('isConnected', isConnected));
+        .add(DiagnosticsProperty('type', 'BluetoothConnectionState.connected'));
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$BluetoothConnectionStateLoadedImpl &&
-            (identical(other.device, device) || other.device == device) &&
-            (identical(other.isConnected, isConnected) ||
-                other.isConnected == isConnected));
+            other is _$BluetoothConnectionStateConnectedImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, device, isConnected);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$BluetoothConnectionStateLoadedImplCopyWith<
-          _$BluetoothConnectionStateLoadedImpl>
-      get copyWith => __$$BluetoothConnectionStateLoadedImplCopyWithImpl<
-          _$BluetoothConnectionStateLoadedImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(DiscoveredDevice? device, bool isConnected)
-        loaded,
-    required TResult Function(dynamic error) error,
+    required TResult Function(List<DiscoveredDevice> devices) observing,
+    required TResult Function() connecting,
+    required TResult Function() connected,
+    required TResult Function() disconnecting,
+    required TResult Function() disconnected,
+    required TResult Function(String message) error,
   }) {
-    return loaded(device, isConnected);
+    return connected();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(DiscoveredDevice? device, bool isConnected)? loaded,
-    TResult? Function(dynamic error)? error,
+    TResult? Function(List<DiscoveredDevice> devices)? observing,
+    TResult? Function()? connecting,
+    TResult? Function()? connected,
+    TResult? Function()? disconnecting,
+    TResult? Function()? disconnected,
+    TResult? Function(String message)? error,
   }) {
-    return loaded?.call(device, isConnected);
+    return connected?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(DiscoveredDevice? device, bool isConnected)? loaded,
-    TResult Function(dynamic error)? error,
+    TResult Function(List<DiscoveredDevice> devices)? observing,
+    TResult Function()? connecting,
+    TResult Function()? connected,
+    TResult Function()? disconnecting,
+    TResult Function()? disconnected,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(device, isConnected);
+    if (connected != null) {
+      return connected();
     }
     return orElse();
   }
@@ -476,52 +715,368 @@ class _$BluetoothConnectionStateLoadedImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BluetoothConnectionStateInitial value) initial,
-    required TResult Function(BluetoothConnectionStateLoading value) loading,
-    required TResult Function(BluetoothConnectionStateLoaded value) loaded,
+    required TResult Function(BluetoothConnectionStateObserving value)
+        observing,
+    required TResult Function(BluetoothConnectionStateConnecting value)
+        connecting,
+    required TResult Function(BluetoothConnectionStateConnected value)
+        connected,
+    required TResult Function(BluetoothConnectionStateDisconnecting value)
+        disconnecting,
+    required TResult Function(BluetoothConnectionStateDisconnected value)
+        disconnected,
     required TResult Function(BluetoothConnectionStateError value) error,
   }) {
-    return loaded(this);
+    return connected(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BluetoothConnectionStateInitial value)? initial,
-    TResult? Function(BluetoothConnectionStateLoading value)? loading,
-    TResult? Function(BluetoothConnectionStateLoaded value)? loaded,
+    TResult? Function(BluetoothConnectionStateObserving value)? observing,
+    TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
     TResult? Function(BluetoothConnectionStateError value)? error,
   }) {
-    return loaded?.call(this);
+    return connected?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BluetoothConnectionStateInitial value)? initial,
-    TResult Function(BluetoothConnectionStateLoading value)? loading,
-    TResult Function(BluetoothConnectionStateLoaded value)? loaded,
+    TResult Function(BluetoothConnectionStateObserving value)? observing,
+    TResult Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
     TResult Function(BluetoothConnectionStateError value)? error,
     required TResult orElse(),
   }) {
-    if (loaded != null) {
-      return loaded(this);
+    if (connected != null) {
+      return connected(this);
     }
     return orElse();
   }
 }
 
-abstract class BluetoothConnectionStateLoaded
+abstract class BluetoothConnectionStateConnected
     implements BluetoothConnectionState {
-  const factory BluetoothConnectionStateLoaded(
-          final DiscoveredDevice? device, final bool isConnected) =
-      _$BluetoothConnectionStateLoadedImpl;
+  const factory BluetoothConnectionStateConnected() =
+      _$BluetoothConnectionStateConnectedImpl;
+}
 
-  DiscoveredDevice? get device;
-  bool get isConnected;
-  @JsonKey(ignore: true)
-  _$$BluetoothConnectionStateLoadedImplCopyWith<
-          _$BluetoothConnectionStateLoadedImpl>
-      get copyWith => throw _privateConstructorUsedError;
+/// @nodoc
+abstract class _$$BluetoothConnectionStateDisconnectingImplCopyWith<$Res> {
+  factory _$$BluetoothConnectionStateDisconnectingImplCopyWith(
+          _$BluetoothConnectionStateDisconnectingImpl value,
+          $Res Function(_$BluetoothConnectionStateDisconnectingImpl) then) =
+      __$$BluetoothConnectionStateDisconnectingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BluetoothConnectionStateDisconnectingImplCopyWithImpl<$Res>
+    extends _$BluetoothConnectionStateCopyWithImpl<$Res,
+        _$BluetoothConnectionStateDisconnectingImpl>
+    implements _$$BluetoothConnectionStateDisconnectingImplCopyWith<$Res> {
+  __$$BluetoothConnectionStateDisconnectingImplCopyWithImpl(
+      _$BluetoothConnectionStateDisconnectingImpl _value,
+      $Res Function(_$BluetoothConnectionStateDisconnectingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$BluetoothConnectionStateDisconnectingImpl
+    with DiagnosticableTreeMixin
+    implements BluetoothConnectionStateDisconnecting {
+  const _$BluetoothConnectionStateDisconnectingImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BluetoothConnectionState.disconnecting()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'BluetoothConnectionState.disconnecting'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BluetoothConnectionStateDisconnectingImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<DiscoveredDevice> devices) observing,
+    required TResult Function() connecting,
+    required TResult Function() connected,
+    required TResult Function() disconnecting,
+    required TResult Function() disconnected,
+    required TResult Function(String message) error,
+  }) {
+    return disconnecting();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<DiscoveredDevice> devices)? observing,
+    TResult? Function()? connecting,
+    TResult? Function()? connected,
+    TResult? Function()? disconnecting,
+    TResult? Function()? disconnected,
+    TResult? Function(String message)? error,
+  }) {
+    return disconnecting?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<DiscoveredDevice> devices)? observing,
+    TResult Function()? connecting,
+    TResult Function()? connected,
+    TResult Function()? disconnecting,
+    TResult Function()? disconnected,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (disconnecting != null) {
+      return disconnecting();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BluetoothConnectionStateInitial value) initial,
+    required TResult Function(BluetoothConnectionStateObserving value)
+        observing,
+    required TResult Function(BluetoothConnectionStateConnecting value)
+        connecting,
+    required TResult Function(BluetoothConnectionStateConnected value)
+        connected,
+    required TResult Function(BluetoothConnectionStateDisconnecting value)
+        disconnecting,
+    required TResult Function(BluetoothConnectionStateDisconnected value)
+        disconnected,
+    required TResult Function(BluetoothConnectionStateError value) error,
+  }) {
+    return disconnecting(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BluetoothConnectionStateInitial value)? initial,
+    TResult? Function(BluetoothConnectionStateObserving value)? observing,
+    TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
+    TResult? Function(BluetoothConnectionStateError value)? error,
+  }) {
+    return disconnecting?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BluetoothConnectionStateInitial value)? initial,
+    TResult Function(BluetoothConnectionStateObserving value)? observing,
+    TResult Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
+    TResult Function(BluetoothConnectionStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (disconnecting != null) {
+      return disconnecting(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BluetoothConnectionStateDisconnecting
+    implements BluetoothConnectionState {
+  const factory BluetoothConnectionStateDisconnecting() =
+      _$BluetoothConnectionStateDisconnectingImpl;
+}
+
+/// @nodoc
+abstract class _$$BluetoothConnectionStateDisconnectedImplCopyWith<$Res> {
+  factory _$$BluetoothConnectionStateDisconnectedImplCopyWith(
+          _$BluetoothConnectionStateDisconnectedImpl value,
+          $Res Function(_$BluetoothConnectionStateDisconnectedImpl) then) =
+      __$$BluetoothConnectionStateDisconnectedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BluetoothConnectionStateDisconnectedImplCopyWithImpl<$Res>
+    extends _$BluetoothConnectionStateCopyWithImpl<$Res,
+        _$BluetoothConnectionStateDisconnectedImpl>
+    implements _$$BluetoothConnectionStateDisconnectedImplCopyWith<$Res> {
+  __$$BluetoothConnectionStateDisconnectedImplCopyWithImpl(
+      _$BluetoothConnectionStateDisconnectedImpl _value,
+      $Res Function(_$BluetoothConnectionStateDisconnectedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$BluetoothConnectionStateDisconnectedImpl
+    with DiagnosticableTreeMixin
+    implements BluetoothConnectionStateDisconnected {
+  const _$BluetoothConnectionStateDisconnectedImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BluetoothConnectionState.disconnected()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'BluetoothConnectionState.disconnected'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BluetoothConnectionStateDisconnectedImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<DiscoveredDevice> devices) observing,
+    required TResult Function() connecting,
+    required TResult Function() connected,
+    required TResult Function() disconnecting,
+    required TResult Function() disconnected,
+    required TResult Function(String message) error,
+  }) {
+    return disconnected();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<DiscoveredDevice> devices)? observing,
+    TResult? Function()? connecting,
+    TResult? Function()? connected,
+    TResult? Function()? disconnecting,
+    TResult? Function()? disconnected,
+    TResult? Function(String message)? error,
+  }) {
+    return disconnected?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<DiscoveredDevice> devices)? observing,
+    TResult Function()? connecting,
+    TResult Function()? connected,
+    TResult Function()? disconnecting,
+    TResult Function()? disconnected,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (disconnected != null) {
+      return disconnected();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BluetoothConnectionStateInitial value) initial,
+    required TResult Function(BluetoothConnectionStateObserving value)
+        observing,
+    required TResult Function(BluetoothConnectionStateConnecting value)
+        connecting,
+    required TResult Function(BluetoothConnectionStateConnected value)
+        connected,
+    required TResult Function(BluetoothConnectionStateDisconnecting value)
+        disconnecting,
+    required TResult Function(BluetoothConnectionStateDisconnected value)
+        disconnected,
+    required TResult Function(BluetoothConnectionStateError value) error,
+  }) {
+    return disconnected(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BluetoothConnectionStateInitial value)? initial,
+    TResult? Function(BluetoothConnectionStateObserving value)? observing,
+    TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
+    TResult? Function(BluetoothConnectionStateError value)? error,
+  }) {
+    return disconnected?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BluetoothConnectionStateInitial value)? initial,
+    TResult Function(BluetoothConnectionStateObserving value)? observing,
+    TResult Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
+    TResult Function(BluetoothConnectionStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (disconnected != null) {
+      return disconnected(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BluetoothConnectionStateDisconnected
+    implements BluetoothConnectionState {
+  const factory BluetoothConnectionStateDisconnected() =
+      _$BluetoothConnectionStateDisconnectedImpl;
 }
 
 /// @nodoc
@@ -531,7 +1086,7 @@ abstract class _$$BluetoothConnectionStateErrorImplCopyWith<$Res> {
           $Res Function(_$BluetoothConnectionStateErrorImpl) then) =
       __$$BluetoothConnectionStateErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({dynamic error});
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -547,13 +1102,13 @@ class __$$BluetoothConnectionStateErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? message = null,
   }) {
     return _then(_$BluetoothConnectionStateErrorImpl(
-      error: freezed == error
-          ? _value.error
-          : error // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -563,14 +1118,14 @@ class __$$BluetoothConnectionStateErrorImplCopyWithImpl<$Res>
 class _$BluetoothConnectionStateErrorImpl
     with DiagnosticableTreeMixin
     implements BluetoothConnectionStateError {
-  const _$BluetoothConnectionStateErrorImpl({required this.error});
+  const _$BluetoothConnectionStateErrorImpl(this.message);
 
   @override
-  final dynamic error;
+  final String message;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BluetoothConnectionState.error(error: $error)';
+    return 'BluetoothConnectionState.error(message: $message)';
   }
 
   @override
@@ -578,7 +1133,7 @@ class _$BluetoothConnectionStateErrorImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'BluetoothConnectionState.error'))
-      ..add(DiagnosticsProperty('error', error));
+      ..add(DiagnosticsProperty('message', message));
   }
 
   @override
@@ -586,12 +1141,11 @@ class _$BluetoothConnectionStateErrorImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BluetoothConnectionStateErrorImpl &&
-            const DeepCollectionEquality().equals(other.error, error));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
@@ -605,36 +1159,44 @@ class _$BluetoothConnectionStateErrorImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(DiscoveredDevice? device, bool isConnected)
-        loaded,
-    required TResult Function(dynamic error) error,
+    required TResult Function(List<DiscoveredDevice> devices) observing,
+    required TResult Function() connecting,
+    required TResult Function() connected,
+    required TResult Function() disconnecting,
+    required TResult Function() disconnected,
+    required TResult Function(String message) error,
   }) {
-    return error(this.error);
+    return error(message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(DiscoveredDevice? device, bool isConnected)? loaded,
-    TResult? Function(dynamic error)? error,
+    TResult? Function(List<DiscoveredDevice> devices)? observing,
+    TResult? Function()? connecting,
+    TResult? Function()? connected,
+    TResult? Function()? disconnecting,
+    TResult? Function()? disconnected,
+    TResult? Function(String message)? error,
   }) {
-    return error?.call(this.error);
+    return error?.call(message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(DiscoveredDevice? device, bool isConnected)? loaded,
-    TResult Function(dynamic error)? error,
+    TResult Function(List<DiscoveredDevice> devices)? observing,
+    TResult Function()? connecting,
+    TResult Function()? connected,
+    TResult Function()? disconnecting,
+    TResult Function()? disconnected,
+    TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(this.error);
+      return error(message);
     }
     return orElse();
   }
@@ -643,8 +1205,16 @@ class _$BluetoothConnectionStateErrorImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(BluetoothConnectionStateInitial value) initial,
-    required TResult Function(BluetoothConnectionStateLoading value) loading,
-    required TResult Function(BluetoothConnectionStateLoaded value) loaded,
+    required TResult Function(BluetoothConnectionStateObserving value)
+        observing,
+    required TResult Function(BluetoothConnectionStateConnecting value)
+        connecting,
+    required TResult Function(BluetoothConnectionStateConnected value)
+        connected,
+    required TResult Function(BluetoothConnectionStateDisconnecting value)
+        disconnecting,
+    required TResult Function(BluetoothConnectionStateDisconnected value)
+        disconnected,
     required TResult Function(BluetoothConnectionStateError value) error,
   }) {
     return error(this);
@@ -654,8 +1224,12 @@ class _$BluetoothConnectionStateErrorImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(BluetoothConnectionStateInitial value)? initial,
-    TResult? Function(BluetoothConnectionStateLoading value)? loading,
-    TResult? Function(BluetoothConnectionStateLoaded value)? loaded,
+    TResult? Function(BluetoothConnectionStateObserving value)? observing,
+    TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
     TResult? Function(BluetoothConnectionStateError value)? error,
   }) {
     return error?.call(this);
@@ -665,8 +1239,12 @@ class _$BluetoothConnectionStateErrorImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(BluetoothConnectionStateInitial value)? initial,
-    TResult Function(BluetoothConnectionStateLoading value)? loading,
-    TResult Function(BluetoothConnectionStateLoaded value)? loaded,
+    TResult Function(BluetoothConnectionStateObserving value)? observing,
+    TResult Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
     TResult Function(BluetoothConnectionStateError value)? error,
     required TResult orElse(),
   }) {
@@ -679,10 +1257,10 @@ class _$BluetoothConnectionStateErrorImpl
 
 abstract class BluetoothConnectionStateError
     implements BluetoothConnectionState {
-  const factory BluetoothConnectionStateError({required final dynamic error}) =
+  const factory BluetoothConnectionStateError(final String message) =
       _$BluetoothConnectionStateErrorImpl;
 
-  dynamic get error;
+  String get message;
   @JsonKey(ignore: true)
   _$$BluetoothConnectionStateErrorImplCopyWith<
           _$BluetoothConnectionStateErrorImpl>

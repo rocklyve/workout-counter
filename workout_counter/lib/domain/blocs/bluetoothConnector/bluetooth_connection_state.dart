@@ -1,21 +1,17 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:reactive_ble_platform_interface/src/model/discovered_device.dart';
 
 part 'bluetooth_connection_state.freezed.dart';
 
 @freezed
 class BluetoothConnectionState with _$BluetoothConnectionState {
   const factory BluetoothConnectionState.initial() = BluetoothConnectionStateInitial;
-
-  const factory BluetoothConnectionState.loading() = BluetoothConnectionStateLoading;
-
-  const factory BluetoothConnectionState.loaded(
-    DiscoveredDevice? device,
-    bool isConnected,
-  ) = BluetoothConnectionStateLoaded;
-
-  const factory BluetoothConnectionState.error({
-    required dynamic error,
-  }) = BluetoothConnectionStateError;
+  const factory BluetoothConnectionState.observing({required List<DiscoveredDevice> devices}) =
+      BluetoothConnectionStateObserving;
+  const factory BluetoothConnectionState.connecting() = BluetoothConnectionStateConnecting;
+  const factory BluetoothConnectionState.connected() = BluetoothConnectionStateConnected;
+  const factory BluetoothConnectionState.disconnecting() = BluetoothConnectionStateDisconnecting;
+  const factory BluetoothConnectionState.disconnected() = BluetoothConnectionStateDisconnected;
+  const factory BluetoothConnectionState.error(String message) = BluetoothConnectionStateError;
 }

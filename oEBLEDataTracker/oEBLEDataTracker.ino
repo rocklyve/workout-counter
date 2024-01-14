@@ -1,19 +1,18 @@
 #include <Wire.h>
 #include "src/Protocentral_MLX90632/Protocentral_MLX90632.h"
 #include "TCA9548A.h"
-#include "src/SD_Logger/SD_Logger.h"
 #include "src/LEDManager/LEDManager.h"
 #include <Arduino.h>
+#include <ArduinoBLE.h>
 #include "src/IMU_Sensor/IMU_Sensor.h"
 
 TCA9548A mux;
-SD_Logger *logger;
 IMU_Sensor imu;
 
 LEDManager ledManager;
 
 // if true, the code waits until serial is available
-bool isDebugMode = false;
+bool isDebugMode = true;
 
 // PCB is 4,6,7
 // FlexPCB is 1,2,3
@@ -40,9 +39,15 @@ const int interval = 20;          // Sampling interval in milliseconds (50Hz)
 
 int measurement_state = 1; // Initial measurement state
 
+BLEService dataService("001A"); // Custom service UUID
+BLECharacteristic imuCharacteristic("200A", BLERead | BLENotify, 20);
+BLECharacteristic objectTempCharacteristic("200B", BLERead | BLENotify, 20);
+BLECharacteristic sensorTempCharacteristic("200C", BLERead | BLENotify, 20);
+
 // Function prototypes
 void setupSensors();
 void setupButtonInterrupt();
+void setupBLE();
 void initializeMLXSensor(Protocentral_MLX90632 &sensor, uint8_t index);
 void initializeIMU();
 void readSensorData(int *data);
@@ -52,53 +57,34 @@ void stopMeasurement();
 /*****************************************  setup() *************************************************/
 void setup()
 {
-  if (isDebugMode)
-  {
+  // if (isDebugMode)
+  // {
     Serial.begin(115200);
     while (!Serial)
     {
     };
-  }
-
-  // setup the random generator for better randomness
-  randomSeed(analogRead(0));
+  // }
 
   setupButtonInterrupt();
 
-  // Create the new filename
-  logger = new SD_Logger();
+  setupBLE();
 
-  int randSuffix = random(1, 10001);                                        // Generate a random integer between 1 and 10000
-  String file_name = String("Logging") + "_" + String(randSuffix) + ".csv"; // Append suffix
-
-  delay(20);
-  logger->set_name(file_name);
-  delay(20);
-
-  if (!logger->begin())
-  {
-    if (isDebugMode)
-    {
-      Serial.println("SD Logger initialization failed!");
-    }
-    ledManager.changeLEDColor(-1);
-    while (1)
-      ; // Stop execution if SD Logger initialization fails
-  }
-  else
-  {
-    if (isDebugMode)
-    {
-      Serial.println("Logger initialized and CSV name set.");
-    }
-    initializeIMU();
-    setupSensors();
-  }
+  initializeIMU();
+  setupSensors();
 }
 
 /*****************************************  loop() *************************************************/
 void loop()
 {
+  BLEDevice central = BLE.central();
+  if (central) {
+    if (central.connected()) {
+      // if (isDebugMode) {
+        Serial.println("Connected to a central device.");
+      // }
+    }
+  }
+
   unsigned long currentMillis = millis(); // Grab current time
 
   if (currentMillis - previousMillis >= interval)
@@ -199,6 +185,27 @@ void setupButtonInterrupt()
   attachInterrupt(digitalPinToInterrupt(buttonPin), buttonPressed, FALLING); // Attach interrupt to the button pin, trigger on FALLING edge
 }
 
+void setupBLE() {
+  if (!BLE.begin()) {
+    Serial.println("Starting BLE failed!");
+    while (1);
+  }
+
+  BLE.setLocalName("DataTracker");
+  BLE.setAdvertisedService(dataService);
+  dataService.addCharacteristic(imuCharacteristic);
+  dataService.addCharacteristic(sensorTempCharacteristic);
+  dataService.addCharacteristic(objectTempCharacteristic);
+  BLE.addService(dataService);
+  BLE.advertise();
+
+  // if (isDebugMode) {
+    Serial.println("BLE set up, continue");
+    Serial.print("BLE Device ID: ");
+    Serial.println(BLE.address());
+  // }
+}
+
 void initializeMLXSensor(Protocentral_MLX90632 &sensor, uint8_t index)
 {
   mux.openChannel(MLX_CHANNELS[index]);
@@ -241,9 +248,7 @@ void readTemperatureSensorData(int *data)
   // Read MLX sensor data...
   if (amount_of_0_found >= 6)
   {
-    saveDataToSDCard(data, -1);
-    // Logging the data
-    logger->end();
+    stopMeasurement();
     ledManager.changeLEDColor(-1);
 
     if (isDebugMode)
@@ -307,8 +312,34 @@ void readIMUSensorData(int *data)
 void saveDataToSDCard(int *data, int id)
 {
   unsigned int timestamp = millis();
-  String data_string = convert_int_to_string(data);
-  logger->data_callback(id, timestamp, data_string);
+  // String data_string = convert_int_to_string(data);
+
+  int objectTempStartIndex = 1;
+  int objectTempEndIndex = 6;
+
+  int sensorTempStartIndex = 7;
+  int sensorTempEndIndex = 12; // Adjust these indices as per your data structure
+
+  int imuStartIndex = 13;
+  int imuEndIndex = 21;
+
+  String data_string_imu = convert_int_to_string(data, imuStartIndex, imuEndIndex);
+  String data_string_objTemp = convert_int_to_string(data, objectTempStartIndex, objectTempEndIndex);
+  String data_string_sensorTemp = convert_int_to_string(data, sensorTempStartIndex, sensorTempEndIndex);
+  // logger->data_callback(id, timestamp, data_string);
+  imuCharacteristic.writeValue(data_string_imu.c_str());
+  objectTempCharacteristic.writeValue(data_string_objTemp.c_str());
+  sensorTempCharacteristic.writeValue(data_string_sensorTemp.c_str());
+  if (isDebugMode) {
+        Serial.print("BLE: ");
+        Serial.print(timestamp);
+        Serial.print(", ");
+        Serial.print(data_string_objTemp);
+        Serial.print(", ");
+        Serial.print(data_string_sensorTemp);
+        Serial.print(", ");
+        Serial.println(data_string_imu);
+  }
 }
 
 String convert_int_to_string(int *data)
@@ -325,12 +356,24 @@ String convert_int_to_string(int *data)
   return data_string;
 }
 
+String convert_int_to_string(int *data, int start, int end) {
+    String data_string = "";
+    for (int i = start; i <= end; ++i) {
+        data_string += String(data[i]);
+        if (i < end) {
+            data_string += ",";
+        }
+    }
+    return data_string;
+}
+
 void stopMeasurement()
 {
   unsigned int timestamp = millis();
-  logger->data_callback(-1, timestamp, "");
+  //logger->data_callback(-1, timestamp, "");
+  Serial.println("Stop BLE Measurement");
 
-  logger->end();
+  //logger->end();
   ledManager.changeLEDColor(-1);
   if (isDebugMode)
   {

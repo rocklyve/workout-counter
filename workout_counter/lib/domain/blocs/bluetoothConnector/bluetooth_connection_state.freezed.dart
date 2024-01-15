@@ -22,6 +22,9 @@ mixin _$BluetoothConnectionState {
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
+    required TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)
+        dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
     required TResult Function(String message) error,
@@ -33,6 +36,9 @@ mixin _$BluetoothConnectionState {
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
+    TResult? Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
     TResult? Function(String message)? error,
@@ -44,6 +50,9 @@ mixin _$BluetoothConnectionState {
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
+    TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
     TResult Function(String message)? error,
@@ -59,6 +68,8 @@ mixin _$BluetoothConnectionState {
         connecting,
     required TResult Function(BluetoothConnectionStateConnected value)
         connected,
+    required TResult Function(BluetoothConnectionStateDataReceived value)
+        dataReceived,
     required TResult Function(BluetoothConnectionStateDisconnecting value)
         disconnecting,
     required TResult Function(BluetoothConnectionStateDisconnected value)
@@ -72,6 +83,7 @@ mixin _$BluetoothConnectionState {
     TResult? Function(BluetoothConnectionStateObserving value)? observing,
     TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult? Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -84,6 +96,7 @@ mixin _$BluetoothConnectionState {
     TResult Function(BluetoothConnectionStateObserving value)? observing,
     TResult Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -167,6 +180,9 @@ class _$BluetoothConnectionStateInitialImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
+    required TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)
+        dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
     required TResult Function(String message) error,
@@ -181,6 +197,9 @@ class _$BluetoothConnectionStateInitialImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
+    TResult? Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
     TResult? Function(String message)? error,
@@ -195,6 +214,9 @@ class _$BluetoothConnectionStateInitialImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
+    TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
     TResult Function(String message)? error,
@@ -216,6 +238,8 @@ class _$BluetoothConnectionStateInitialImpl
         connecting,
     required TResult Function(BluetoothConnectionStateConnected value)
         connected,
+    required TResult Function(BluetoothConnectionStateDataReceived value)
+        dataReceived,
     required TResult Function(BluetoothConnectionStateDisconnecting value)
         disconnecting,
     required TResult Function(BluetoothConnectionStateDisconnected value)
@@ -232,6 +256,7 @@ class _$BluetoothConnectionStateInitialImpl
     TResult? Function(BluetoothConnectionStateObserving value)? observing,
     TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult? Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -247,6 +272,7 @@ class _$BluetoothConnectionStateInitialImpl
     TResult Function(BluetoothConnectionStateObserving value)? observing,
     TResult Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -357,6 +383,9 @@ class _$BluetoothConnectionStateObservingImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
+    required TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)
+        dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
     required TResult Function(String message) error,
@@ -371,6 +400,9 @@ class _$BluetoothConnectionStateObservingImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
+    TResult? Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
     TResult? Function(String message)? error,
@@ -385,6 +417,9 @@ class _$BluetoothConnectionStateObservingImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
+    TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
     TResult Function(String message)? error,
@@ -406,6 +441,8 @@ class _$BluetoothConnectionStateObservingImpl
         connecting,
     required TResult Function(BluetoothConnectionStateConnected value)
         connected,
+    required TResult Function(BluetoothConnectionStateDataReceived value)
+        dataReceived,
     required TResult Function(BluetoothConnectionStateDisconnecting value)
         disconnecting,
     required TResult Function(BluetoothConnectionStateDisconnected value)
@@ -422,6 +459,7 @@ class _$BluetoothConnectionStateObservingImpl
     TResult? Function(BluetoothConnectionStateObserving value)? observing,
     TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult? Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -437,6 +475,7 @@ class _$BluetoothConnectionStateObservingImpl
     TResult Function(BluetoothConnectionStateObserving value)? observing,
     TResult Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -518,6 +557,9 @@ class _$BluetoothConnectionStateConnectingImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
+    required TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)
+        dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
     required TResult Function(String message) error,
@@ -532,6 +574,9 @@ class _$BluetoothConnectionStateConnectingImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
+    TResult? Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
     TResult? Function(String message)? error,
@@ -546,6 +591,9 @@ class _$BluetoothConnectionStateConnectingImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
+    TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
     TResult Function(String message)? error,
@@ -567,6 +615,8 @@ class _$BluetoothConnectionStateConnectingImpl
         connecting,
     required TResult Function(BluetoothConnectionStateConnected value)
         connected,
+    required TResult Function(BluetoothConnectionStateDataReceived value)
+        dataReceived,
     required TResult Function(BluetoothConnectionStateDisconnecting value)
         disconnecting,
     required TResult Function(BluetoothConnectionStateDisconnected value)
@@ -583,6 +633,7 @@ class _$BluetoothConnectionStateConnectingImpl
     TResult? Function(BluetoothConnectionStateObserving value)? observing,
     TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult? Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -598,6 +649,7 @@ class _$BluetoothConnectionStateConnectingImpl
     TResult Function(BluetoothConnectionStateObserving value)? observing,
     TResult Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -672,6 +724,9 @@ class _$BluetoothConnectionStateConnectedImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
+    required TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)
+        dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
     required TResult Function(String message) error,
@@ -686,6 +741,9 @@ class _$BluetoothConnectionStateConnectedImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
+    TResult? Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
     TResult? Function(String message)? error,
@@ -700,6 +758,9 @@ class _$BluetoothConnectionStateConnectedImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
+    TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
     TResult Function(String message)? error,
@@ -721,6 +782,8 @@ class _$BluetoothConnectionStateConnectedImpl
         connecting,
     required TResult Function(BluetoothConnectionStateConnected value)
         connected,
+    required TResult Function(BluetoothConnectionStateDataReceived value)
+        dataReceived,
     required TResult Function(BluetoothConnectionStateDisconnecting value)
         disconnecting,
     required TResult Function(BluetoothConnectionStateDisconnected value)
@@ -737,6 +800,7 @@ class _$BluetoothConnectionStateConnectedImpl
     TResult? Function(BluetoothConnectionStateObserving value)? observing,
     TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult? Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -752,6 +816,7 @@ class _$BluetoothConnectionStateConnectedImpl
     TResult Function(BluetoothConnectionStateObserving value)? observing,
     TResult Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -769,6 +834,261 @@ abstract class BluetoothConnectionStateConnected
     implements BluetoothConnectionState {
   const factory BluetoothConnectionStateConnected() =
       _$BluetoothConnectionStateConnectedImpl;
+}
+
+/// @nodoc
+abstract class _$$BluetoothConnectionStateDataReceivedImplCopyWith<$Res> {
+  factory _$$BluetoothConnectionStateDataReceivedImplCopyWith(
+          _$BluetoothConnectionStateDataReceivedImpl value,
+          $Res Function(_$BluetoothConnectionStateDataReceivedImpl) then) =
+      __$$BluetoothConnectionStateDataReceivedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<int> imuData, List<int> objectTempData, List<int> sensorTempData});
+}
+
+/// @nodoc
+class __$$BluetoothConnectionStateDataReceivedImplCopyWithImpl<$Res>
+    extends _$BluetoothConnectionStateCopyWithImpl<$Res,
+        _$BluetoothConnectionStateDataReceivedImpl>
+    implements _$$BluetoothConnectionStateDataReceivedImplCopyWith<$Res> {
+  __$$BluetoothConnectionStateDataReceivedImplCopyWithImpl(
+      _$BluetoothConnectionStateDataReceivedImpl _value,
+      $Res Function(_$BluetoothConnectionStateDataReceivedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? imuData = null,
+    Object? objectTempData = null,
+    Object? sensorTempData = null,
+  }) {
+    return _then(_$BluetoothConnectionStateDataReceivedImpl(
+      imuData: null == imuData
+          ? _value._imuData
+          : imuData // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      objectTempData: null == objectTempData
+          ? _value._objectTempData
+          : objectTempData // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      sensorTempData: null == sensorTempData
+          ? _value._sensorTempData
+          : sensorTempData // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$BluetoothConnectionStateDataReceivedImpl
+    with DiagnosticableTreeMixin
+    implements BluetoothConnectionStateDataReceived {
+  const _$BluetoothConnectionStateDataReceivedImpl(
+      {required final List<int> imuData,
+      required final List<int> objectTempData,
+      required final List<int> sensorTempData})
+      : _imuData = imuData,
+        _objectTempData = objectTempData,
+        _sensorTempData = sensorTempData;
+
+  final List<int> _imuData;
+  @override
+  List<int> get imuData {
+    if (_imuData is EqualUnmodifiableListView) return _imuData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_imuData);
+  }
+
+  final List<int> _objectTempData;
+  @override
+  List<int> get objectTempData {
+    if (_objectTempData is EqualUnmodifiableListView) return _objectTempData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_objectTempData);
+  }
+
+  final List<int> _sensorTempData;
+  @override
+  List<int> get sensorTempData {
+    if (_sensorTempData is EqualUnmodifiableListView) return _sensorTempData;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_sensorTempData);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BluetoothConnectionState.dataReceived(imuData: $imuData, objectTempData: $objectTempData, sensorTempData: $sensorTempData)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+          DiagnosticsProperty('type', 'BluetoothConnectionState.dataReceived'))
+      ..add(DiagnosticsProperty('imuData', imuData))
+      ..add(DiagnosticsProperty('objectTempData', objectTempData))
+      ..add(DiagnosticsProperty('sensorTempData', sensorTempData));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$BluetoothConnectionStateDataReceivedImpl &&
+            const DeepCollectionEquality().equals(other._imuData, _imuData) &&
+            const DeepCollectionEquality()
+                .equals(other._objectTempData, _objectTempData) &&
+            const DeepCollectionEquality()
+                .equals(other._sensorTempData, _sensorTempData));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_imuData),
+      const DeepCollectionEquality().hash(_objectTempData),
+      const DeepCollectionEquality().hash(_sensorTempData));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$BluetoothConnectionStateDataReceivedImplCopyWith<
+          _$BluetoothConnectionStateDataReceivedImpl>
+      get copyWith => __$$BluetoothConnectionStateDataReceivedImplCopyWithImpl<
+          _$BluetoothConnectionStateDataReceivedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<DiscoveredDevice> devices) observing,
+    required TResult Function() connecting,
+    required TResult Function() connected,
+    required TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)
+        dataReceived,
+    required TResult Function() disconnecting,
+    required TResult Function() disconnected,
+    required TResult Function(String message) error,
+  }) {
+    return dataReceived(imuData, objectTempData, sensorTempData);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<DiscoveredDevice> devices)? observing,
+    TResult? Function()? connecting,
+    TResult? Function()? connected,
+    TResult? Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
+    TResult? Function()? disconnecting,
+    TResult? Function()? disconnected,
+    TResult? Function(String message)? error,
+  }) {
+    return dataReceived?.call(imuData, objectTempData, sensorTempData);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<DiscoveredDevice> devices)? observing,
+    TResult Function()? connecting,
+    TResult Function()? connected,
+    TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
+    TResult Function()? disconnecting,
+    TResult Function()? disconnected,
+    TResult Function(String message)? error,
+    required TResult orElse(),
+  }) {
+    if (dataReceived != null) {
+      return dataReceived(imuData, objectTempData, sensorTempData);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(BluetoothConnectionStateInitial value) initial,
+    required TResult Function(BluetoothConnectionStateObserving value)
+        observing,
+    required TResult Function(BluetoothConnectionStateConnecting value)
+        connecting,
+    required TResult Function(BluetoothConnectionStateConnected value)
+        connected,
+    required TResult Function(BluetoothConnectionStateDataReceived value)
+        dataReceived,
+    required TResult Function(BluetoothConnectionStateDisconnecting value)
+        disconnecting,
+    required TResult Function(BluetoothConnectionStateDisconnected value)
+        disconnected,
+    required TResult Function(BluetoothConnectionStateError value) error,
+  }) {
+    return dataReceived(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(BluetoothConnectionStateInitial value)? initial,
+    TResult? Function(BluetoothConnectionStateObserving value)? observing,
+    TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDataReceived value)? dataReceived,
+    TResult? Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
+    TResult? Function(BluetoothConnectionStateError value)? error,
+  }) {
+    return dataReceived?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(BluetoothConnectionStateInitial value)? initial,
+    TResult Function(BluetoothConnectionStateObserving value)? observing,
+    TResult Function(BluetoothConnectionStateConnecting value)? connecting,
+    TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDataReceived value)? dataReceived,
+    TResult Function(BluetoothConnectionStateDisconnecting value)?
+        disconnecting,
+    TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
+    TResult Function(BluetoothConnectionStateError value)? error,
+    required TResult orElse(),
+  }) {
+    if (dataReceived != null) {
+      return dataReceived(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class BluetoothConnectionStateDataReceived
+    implements BluetoothConnectionState {
+  const factory BluetoothConnectionStateDataReceived(
+          {required final List<int> imuData,
+          required final List<int> objectTempData,
+          required final List<int> sensorTempData}) =
+      _$BluetoothConnectionStateDataReceivedImpl;
+
+  List<int> get imuData;
+  List<int> get objectTempData;
+  List<int> get sensorTempData;
+  @JsonKey(ignore: true)
+  _$$BluetoothConnectionStateDataReceivedImplCopyWith<
+          _$BluetoothConnectionStateDataReceivedImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -826,6 +1146,9 @@ class _$BluetoothConnectionStateDisconnectingImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
+    required TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)
+        dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
     required TResult Function(String message) error,
@@ -840,6 +1163,9 @@ class _$BluetoothConnectionStateDisconnectingImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
+    TResult? Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
     TResult? Function(String message)? error,
@@ -854,6 +1180,9 @@ class _$BluetoothConnectionStateDisconnectingImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
+    TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
     TResult Function(String message)? error,
@@ -875,6 +1204,8 @@ class _$BluetoothConnectionStateDisconnectingImpl
         connecting,
     required TResult Function(BluetoothConnectionStateConnected value)
         connected,
+    required TResult Function(BluetoothConnectionStateDataReceived value)
+        dataReceived,
     required TResult Function(BluetoothConnectionStateDisconnecting value)
         disconnecting,
     required TResult Function(BluetoothConnectionStateDisconnected value)
@@ -891,6 +1222,7 @@ class _$BluetoothConnectionStateDisconnectingImpl
     TResult? Function(BluetoothConnectionStateObserving value)? observing,
     TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult? Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -906,6 +1238,7 @@ class _$BluetoothConnectionStateDisconnectingImpl
     TResult Function(BluetoothConnectionStateObserving value)? observing,
     TResult Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -980,6 +1313,9 @@ class _$BluetoothConnectionStateDisconnectedImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
+    required TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)
+        dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
     required TResult Function(String message) error,
@@ -994,6 +1330,9 @@ class _$BluetoothConnectionStateDisconnectedImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
+    TResult? Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
     TResult? Function(String message)? error,
@@ -1008,6 +1347,9 @@ class _$BluetoothConnectionStateDisconnectedImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
+    TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
     TResult Function(String message)? error,
@@ -1029,6 +1371,8 @@ class _$BluetoothConnectionStateDisconnectedImpl
         connecting,
     required TResult Function(BluetoothConnectionStateConnected value)
         connected,
+    required TResult Function(BluetoothConnectionStateDataReceived value)
+        dataReceived,
     required TResult Function(BluetoothConnectionStateDisconnecting value)
         disconnecting,
     required TResult Function(BluetoothConnectionStateDisconnected value)
@@ -1045,6 +1389,7 @@ class _$BluetoothConnectionStateDisconnectedImpl
     TResult? Function(BluetoothConnectionStateObserving value)? observing,
     TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult? Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -1060,6 +1405,7 @@ class _$BluetoothConnectionStateDisconnectedImpl
     TResult Function(BluetoothConnectionStateObserving value)? observing,
     TResult Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -1162,6 +1508,9 @@ class _$BluetoothConnectionStateErrorImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
+    required TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)
+        dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
     required TResult Function(String message) error,
@@ -1176,6 +1525,9 @@ class _$BluetoothConnectionStateErrorImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
+    TResult? Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
     TResult? Function(String message)? error,
@@ -1190,6 +1542,9 @@ class _$BluetoothConnectionStateErrorImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
+    TResult Function(List<int> imuData, List<int> objectTempData,
+            List<int> sensorTempData)?
+        dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
     TResult Function(String message)? error,
@@ -1211,6 +1566,8 @@ class _$BluetoothConnectionStateErrorImpl
         connecting,
     required TResult Function(BluetoothConnectionStateConnected value)
         connected,
+    required TResult Function(BluetoothConnectionStateDataReceived value)
+        dataReceived,
     required TResult Function(BluetoothConnectionStateDisconnecting value)
         disconnecting,
     required TResult Function(BluetoothConnectionStateDisconnected value)
@@ -1227,6 +1584,7 @@ class _$BluetoothConnectionStateErrorImpl
     TResult? Function(BluetoothConnectionStateObserving value)? observing,
     TResult? Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult? Function(BluetoothConnectionStateConnected value)? connected,
+    TResult? Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult? Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult? Function(BluetoothConnectionStateDisconnected value)? disconnected,
@@ -1242,6 +1600,7 @@ class _$BluetoothConnectionStateErrorImpl
     TResult Function(BluetoothConnectionStateObserving value)? observing,
     TResult Function(BluetoothConnectionStateConnecting value)? connecting,
     TResult Function(BluetoothConnectionStateConnected value)? connected,
+    TResult Function(BluetoothConnectionStateDataReceived value)? dataReceived,
     TResult Function(BluetoothConnectionStateDisconnecting value)?
         disconnecting,
     TResult Function(BluetoothConnectionStateDisconnected value)? disconnected,

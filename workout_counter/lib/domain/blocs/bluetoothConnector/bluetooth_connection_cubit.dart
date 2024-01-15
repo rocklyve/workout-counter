@@ -16,7 +16,6 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
   BluetoothConnectionCubit() : super(const bluetoothConnectionState.BluetoothConnectionState.initial());
 
   void startObserving() {
-    print('startObserving');
     if (_scanSubscription != null) {
       return;
     }
@@ -43,7 +42,6 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
   List<DiscoveredDevice> get discoveredDevices => List.unmodifiable(_discoveredDevices);
 
   Future<void> connectToDevice(String deviceId) async {
-    print('connectToDevice: $deviceId');
     emit(BluetoothConnectionState.connecting());
     _connection = await _flutterReactiveBle
         .connectToDevice(
@@ -62,7 +60,6 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
   }
 
   Future<void> _discoverServices(String deviceId) async {
-    print('_discoverServices: $deviceId');
     try {
       final services = await _flutterReactiveBle.getDiscoveredServices(deviceId);
       print('services: $services');
@@ -90,25 +87,54 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
       deviceId: deviceId,
     );
 
-    print('subscribeToCharacteristic: $characteristic');
     _flutterReactiveBle.subscribeToCharacteristic(characteristic).listen((data) {
       // Handle received data for each characteristic
       String receivedString = String.fromCharCodes(data);
       print("Received data from $characteristicUuid: $receivedString");
+      List<int> imuData = _getIMUData(receivedString, characteristicUuid);
+      List<int> objTempData = _getObjTempData(receivedString, characteristicUuid);
+      List<int> sensorTempData = _getSensorTempData(receivedString, characteristicUuid);
+
+      if (state is BluetoothConnectionStateDataReceived) {
+        final currentState = state as BluetoothConnectionStateDataReceived;
+        emit(
+          BluetoothConnectionState.dataReceived(
+            imuData: imuData.isNotEmpty ? imuData : currentState.imuData,
+            objectTempData: objTempData.isNotEmpty ? objTempData : currentState.objectTempData,
+            sensorTempData: sensorTempData.isNotEmpty ? sensorTempData : currentState.sensorTempData,
+          ),
+        );
+      } else {
+        emit(BluetoothConnectionState.dataReceived(
+            imuData: imuData, objectTempData: objTempData, sensorTempData: sensorTempData));
+      }
     }, onError: (error) {
       emit(BluetoothConnectionState.error(error.toString()));
     });
   }
 
-  Future<void> _subscribeToNotifications(QualifiedCharacteristic characteristic) async {
-    print('subscribeToNotifications: $characteristic');
-    _flutterReactiveBle.subscribeToCharacteristic(characteristic).listen((data) {
-      // Handle received data
-      String receivedString = String.fromCharCodes(data);
-      print("Received data: $receivedString");
-    }, onError: (error) {
-      emit(BluetoothConnectionState.error(error.toString()));
-    });
+  List<int> _getIMUData(String receivedString, String characteristicUuid) {
+    List<int> imuData = [];
+    if (characteristicUuid == "200A") {
+      imuData = receivedString.split(",").map((e) => int.parse(e)).toList();
+    }
+    return imuData;
+  }
+
+  List<int> _getObjTempData(String receivedString, String characteristicUuid) {
+    List<int> objTempData = [];
+    if (characteristicUuid == "200B") {
+      objTempData = receivedString.split(",").map((e) => int.parse(e)).toList();
+    }
+    return objTempData;
+  }
+
+  List<int> _getSensorTempData(String receivedString, String characteristicUuid) {
+    List<int> sensorTempData = [];
+    if (characteristicUuid == "200C") {
+      sensorTempData = receivedString.split(",").map((e) => int.parse(e)).toList();
+    }
+    return sensorTempData;
   }
 
   Future<void> stopObserving() async {

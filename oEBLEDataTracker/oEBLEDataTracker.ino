@@ -12,7 +12,7 @@ IMU_Sensor imu;
 LEDManager ledManager;
 
 // if true, the code waits until serial is available
-bool isDebugMode = true;
+bool isDebugMode = false;
 
 // PCB is 4,6,7
 // FlexPCB is 1,2,3
@@ -40,7 +40,7 @@ const int interval = 20;          // Sampling interval in milliseconds (50Hz)
 int measurement_state = 1; // Initial measurement state
 
 BLEService dataService("001A"); // Custom service UUID
-BLECharacteristic imuCharacteristic("200A", BLERead | BLENotify, 20);
+BLECharacteristic imuCharacteristic("200A", BLERead | BLENotify, 40);
 BLECharacteristic objectTempCharacteristic("200B", BLERead | BLENotify, 20);
 BLECharacteristic sensorTempCharacteristic("200C", BLERead | BLENotify, 20);
 
@@ -57,13 +57,13 @@ void stopMeasurement();
 /*****************************************  setup() *************************************************/
 void setup()
 {
-  // if (isDebugMode)
-  // {
+  if (isDebugMode)
+  {
     Serial.begin(115200);
     while (!Serial)
     {
     };
-  // }
+  }
 
   setupButtonInterrupt();
 
@@ -198,12 +198,6 @@ void setupBLE() {
   dataService.addCharacteristic(objectTempCharacteristic);
   BLE.addService(dataService);
   BLE.advertise();
-
-  // if (isDebugMode) {
-    Serial.println("BLE set up, continue");
-    Serial.print("BLE Device ID: ");
-    Serial.println(BLE.address());
-  // }
 }
 
 void initializeMLXSensor(Protocentral_MLX90632 &sensor, uint8_t index)
@@ -287,7 +281,7 @@ void readTemperatureSensorData(int *data)
 
 void readIMUSensorData(int *data)
 {
-  int imu_muliplicator = 10000;
+  int imu_muliplicator = 100;
   float accelX, accelY, accelZ;
   imu.get_acc(accelX, accelY, accelZ);
   data[2 * amount_of_sensors + 1] = accelX * imu_muliplicator;

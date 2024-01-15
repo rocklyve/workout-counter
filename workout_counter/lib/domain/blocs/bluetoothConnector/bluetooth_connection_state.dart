@@ -11,6 +11,11 @@ class BluetoothConnectionState with _$BluetoothConnectionState {
       BluetoothConnectionStateObserving;
   const factory BluetoothConnectionState.connecting() = BluetoothConnectionStateConnecting;
   const factory BluetoothConnectionState.connected() = BluetoothConnectionStateConnected;
+  const factory BluetoothConnectionState.dataReceived({
+    required List<int> imuData,
+    required List<int> objectTempData,
+    required List<int> sensorTempData,
+  }) = BluetoothConnectionStateDataReceived;
   const factory BluetoothConnectionState.disconnecting() = BluetoothConnectionStateDisconnecting;
   const factory BluetoothConnectionState.disconnected() = BluetoothConnectionStateDisconnected;
   const factory BluetoothConnectionState.error(String message) = BluetoothConnectionStateError;

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_counter/domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
+import 'package:workout_counter/ui/pages/sensor_data_chart.dart';
 
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
 import 'bluetooth_connection_page.dart';
+import 'data_chart.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -45,8 +47,27 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Text('Home Page Content'),
+      body: BlocBuilder<BluetoothConnectionCubit, BluetoothConnectionState>(
+        builder: (context, state) {
+          if (state is BluetoothConnectionStateDataReceived) {
+            List<Widget> charts = [];
+            for (int i = 0; i < 6; i++) {
+              if (state.objectTempData[i] != 0 || state.sensorTempData[i] != 0) {
+                charts.add(SensorDataChart(
+                    objectTempData: state.objectTempData, sensorTempData: state.sensorTempData, sensorIndex: i));
+              }
+            }
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  DataChart(dataPoints: state.imuData, title: 'IMU Data'),
+                  ...charts,
+                ],
+              ),
+            );
+          }
+          return Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }

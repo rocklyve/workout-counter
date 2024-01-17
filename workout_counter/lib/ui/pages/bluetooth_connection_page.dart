@@ -15,7 +15,7 @@ class BluetoothConnectionPage extends StatelessWidget {
       ),
       body: BlocConsumer<BluetoothConnectionCubit, BluetoothConnectionState>(
         listener: (context, state) {
-          print('current state: $state');
+          // print('current state: $state');
           if (state is BluetoothConnectionStateError) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(state.message)),

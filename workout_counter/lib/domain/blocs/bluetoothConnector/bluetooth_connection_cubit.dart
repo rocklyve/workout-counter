@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
+import 'package:workout_counter/domain/models/imu_data.dart';
 
+import '../../models/temperature_data.dart';
 import 'bluetooth_connection_state.dart' as bluetoothConnectionState;
 import 'bluetooth_connection_state.dart';
 
@@ -12,6 +14,10 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
   StreamSubscription<ConnectionStateUpdate>? _connection;
   QualifiedCharacteristic? _dataCharacteristic;
   final List<DiscoveredDevice> _discoveredDevices = [];
+  final int _amountOfDataPoints = 500;
+  List<IMUData> _receivedIMUData = [];
+  List<TemperatureData> _receivedObjTemperatureData = [];
+  List<TemperatureData> _receivedSensorTemperatureData = [];
 
   BluetoothConnectionCubit() : super(const bluetoothConnectionState.BluetoothConnectionState.initial());
 
@@ -27,7 +33,7 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
       scanMode: ScanMode.lowLatency,
     ).listen(
       (device) {
-        if (device.name.contains("DataTracker") && !_discoveredDevices.contains(device)) {
+        if (device.name.contains('DataTracker') && !_discoveredDevices.contains(device)) {
           print('add device: ${device.name}, ${device.id}');
           _discoveredDevices.add(device);
           emit(BluetoothConnectionState.observing(devices: _discoveredDevices));
@@ -42,21 +48,36 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
   List<DiscoveredDevice> get discoveredDevices => List.unmodifiable(_discoveredDevices);
 
   Future<void> connectToDevice(String deviceId) async {
-    emit(BluetoothConnectionState.connecting());
+    emit(const BluetoothConnectionState.connecting());
     _connection = await _flutterReactiveBle
         .connectToDevice(
       id: deviceId,
       connectionTimeout: const Duration(seconds: 10),
     )
-        .listen((update) {
-      print('connection update: $update');
-      if (update.connectionState == DeviceConnectionState.connected ||
-          update.connectionState == DeviceConnectionState.connecting) {
-        _discoverServices(deviceId);
-      }
-    }, onError: (error) {
-      emit(BluetoothConnectionState.error(error.toString()));
-    });
+        .listen(
+      (update) {
+        print('connection update: $update');
+        if (update.connectionState == DeviceConnectionState.connected ||
+            update.connectionState == DeviceConnectionState.connecting) {
+          _discoverServices(deviceId);
+        }
+      },
+      onError: (error) {
+        emit(BluetoothConnectionState.error(error.toString()));
+      },
+    );
+  }
+
+  Future<void> stopObserving() async {
+    _scanSubscription?.cancel();
+    emit(const bluetoothConnectionState.BluetoothConnectionState.initial());
+  }
+
+  @override
+  Future<void> close() {
+    _scanSubscription?.cancel();
+
+    return super.close();
   }
 
   Future<void> _discoverServices(String deviceId) async {
@@ -87,64 +108,63 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
       deviceId: deviceId,
     );
 
-    _flutterReactiveBle.subscribeToCharacteristic(characteristic).listen((data) {
-      // Handle received data for each characteristic
-      String receivedString = String.fromCharCodes(data);
-      print("Received data from $characteristicUuid: $receivedString");
-      List<int> imuData = _getIMUData(receivedString, characteristicUuid);
-      List<int> objTempData = _getObjTempData(receivedString, characteristicUuid);
-      List<int> sensorTempData = _getSensorTempData(receivedString, characteristicUuid);
+    StreamSubscription _ = _flutterReactiveBle.subscribeToCharacteristic(characteristic).listen(
+      (data) {
+        // Handle received data for each characteristic
+        String receivedString = String.fromCharCodes(data);
+        // print("Received data from $characteristicUuid: $receivedString");
+        IMUData? imuData = _getIMUData(receivedString, characteristicUuid);
+        if (imuData != null) _receivedIMUData.add(imuData);
+        if (_receivedIMUData.length > _amountOfDataPoints) _receivedIMUData.removeAt(0);
 
-      if (state is BluetoothConnectionStateDataReceived) {
-        final currentState = state as BluetoothConnectionStateDataReceived;
-        emit(
-          BluetoothConnectionState.dataReceived(
-            imuData: imuData.isNotEmpty ? imuData : currentState.imuData,
-            objectTempData: objTempData.isNotEmpty ? objTempData : currentState.objectTempData,
-            sensorTempData: sensorTempData.isNotEmpty ? sensorTempData : currentState.sensorTempData,
-          ),
-        );
-      } else {
+        TemperatureData? objTempData = _getObjTempData(receivedString, characteristicUuid);
+        if (objTempData != null) _receivedObjTemperatureData.add(objTempData);
+        if (_receivedObjTemperatureData.length > _amountOfDataPoints) _receivedObjTemperatureData.removeAt(0);
+
+        TemperatureData? sensorTempData = _getSensorTempData(receivedString, characteristicUuid);
+        if (sensorTempData != null) _receivedSensorTemperatureData.add(sensorTempData);
+        if (_receivedSensorTemperatureData.length > _amountOfDataPoints) _receivedSensorTemperatureData.removeAt(0);
+
+        // Create new instances of the lists for the new state
+        var newIMUData = List<IMUData>.of(_receivedIMUData);
+        var newObjTempData = List<TemperatureData>.of(_receivedObjTemperatureData);
+        var newSensorTempData = List<TemperatureData>.of(_receivedSensorTemperatureData);
+
         emit(BluetoothConnectionState.dataReceived(
-            imuData: imuData, objectTempData: objTempData, sensorTempData: sensorTempData));
-      }
-    }, onError: (error) {
-      emit(BluetoothConnectionState.error(error.toString()));
-    });
+          imuData: newIMUData,
+          objectTempData: newObjTempData,
+          sensorTempData: newSensorTempData,
+        ));
+      },
+      onError: (error) {
+        emit(BluetoothConnectionState.error(
+          error.toString(),
+        ));
+      },
+    );
   }
 
-  List<int> _getIMUData(String receivedString, String characteristicUuid) {
-    List<int> imuData = [];
-    if (characteristicUuid == "200A") {
-      imuData = receivedString.split(",").map((e) => int.parse(e)).toList();
+  IMUData? _getIMUData(String receivedString, String characteristicUuid) {
+    if (characteristicUuid == '200A') {
+      return IMUData.fromString(receivedString);
     }
-    return imuData;
+
+    return null;
   }
 
-  List<int> _getObjTempData(String receivedString, String characteristicUuid) {
-    List<int> objTempData = [];
-    if (characteristicUuid == "200B") {
-      objTempData = receivedString.split(",").map((e) => int.parse(e)).toList();
+  TemperatureData? _getObjTempData(String receivedString, String characteristicUuid) {
+    if (characteristicUuid == '200B') {
+      return TemperatureData.fromString(receivedString);
     }
-    return objTempData;
+
+    return null;
   }
 
-  List<int> _getSensorTempData(String receivedString, String characteristicUuid) {
-    List<int> sensorTempData = [];
-    if (characteristicUuid == "200C") {
-      sensorTempData = receivedString.split(",").map((e) => int.parse(e)).toList();
+  TemperatureData? _getSensorTempData(String receivedString, String characteristicUuid) {
+    if (characteristicUuid == '200C') {
+      return TemperatureData.fromString(receivedString);
     }
-    return sensorTempData;
-  }
 
-  Future<void> stopObserving() async {
-    _scanSubscription?.cancel();
-    emit(const bluetoothConnectionState.BluetoothConnectionState.initial());
-  }
-
-  @override
-  Future<void> close() {
-    _scanSubscription?.cancel();
-    return super.close();
+    return null;
   }
 }

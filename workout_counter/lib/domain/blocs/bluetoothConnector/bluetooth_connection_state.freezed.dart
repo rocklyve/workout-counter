@@ -22,8 +22,10 @@ mixin _$BluetoothConnectionState {
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
-    required TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)
+    required TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)
         dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
@@ -36,8 +38,10 @@ mixin _$BluetoothConnectionState {
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
-    TResult? Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult? Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
@@ -50,8 +54,10 @@ mixin _$BluetoothConnectionState {
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
-    TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
@@ -180,8 +186,10 @@ class _$BluetoothConnectionStateInitialImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
-    required TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)
+    required TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)
         dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
@@ -197,8 +205,10 @@ class _$BluetoothConnectionStateInitialImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
-    TResult? Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult? Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
@@ -214,8 +224,10 @@ class _$BluetoothConnectionStateInitialImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
-    TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
@@ -383,8 +395,10 @@ class _$BluetoothConnectionStateObservingImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
-    required TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)
+    required TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)
         dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
@@ -400,8 +414,10 @@ class _$BluetoothConnectionStateObservingImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
-    TResult? Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult? Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
@@ -417,8 +433,10 @@ class _$BluetoothConnectionStateObservingImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
-    TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
@@ -557,8 +575,10 @@ class _$BluetoothConnectionStateConnectingImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
-    required TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)
+    required TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)
         dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
@@ -574,8 +594,10 @@ class _$BluetoothConnectionStateConnectingImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
-    TResult? Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult? Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
@@ -591,8 +613,10 @@ class _$BluetoothConnectionStateConnectingImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
-    TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
@@ -724,8 +748,10 @@ class _$BluetoothConnectionStateConnectedImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
-    required TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)
+    required TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)
         dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
@@ -741,8 +767,10 @@ class _$BluetoothConnectionStateConnectedImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
-    TResult? Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult? Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
@@ -758,8 +786,10 @@ class _$BluetoothConnectionStateConnectedImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
-    TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
@@ -844,7 +874,9 @@ abstract class _$$BluetoothConnectionStateDataReceivedImplCopyWith<$Res> {
       __$$BluetoothConnectionStateDataReceivedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {List<int> imuData, List<int> objectTempData, List<int> sensorTempData});
+      {List<IMUData> imuData,
+      List<TemperatureData> objectTempData,
+      List<TemperatureData> sensorTempData});
 }
 
 /// @nodoc
@@ -868,15 +900,15 @@ class __$$BluetoothConnectionStateDataReceivedImplCopyWithImpl<$Res>
       imuData: null == imuData
           ? _value._imuData
           : imuData // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<IMUData>,
       objectTempData: null == objectTempData
           ? _value._objectTempData
           : objectTempData // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<TemperatureData>,
       sensorTempData: null == sensorTempData
           ? _value._sensorTempData
           : sensorTempData // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+              as List<TemperatureData>,
     ));
   }
 }
@@ -887,32 +919,32 @@ class _$BluetoothConnectionStateDataReceivedImpl
     with DiagnosticableTreeMixin
     implements BluetoothConnectionStateDataReceived {
   const _$BluetoothConnectionStateDataReceivedImpl(
-      {required final List<int> imuData,
-      required final List<int> objectTempData,
-      required final List<int> sensorTempData})
+      {required final List<IMUData> imuData,
+      required final List<TemperatureData> objectTempData,
+      required final List<TemperatureData> sensorTempData})
       : _imuData = imuData,
         _objectTempData = objectTempData,
         _sensorTempData = sensorTempData;
 
-  final List<int> _imuData;
+  final List<IMUData> _imuData;
   @override
-  List<int> get imuData {
+  List<IMUData> get imuData {
     if (_imuData is EqualUnmodifiableListView) return _imuData;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_imuData);
   }
 
-  final List<int> _objectTempData;
+  final List<TemperatureData> _objectTempData;
   @override
-  List<int> get objectTempData {
+  List<TemperatureData> get objectTempData {
     if (_objectTempData is EqualUnmodifiableListView) return _objectTempData;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_objectTempData);
   }
 
-  final List<int> _sensorTempData;
+  final List<TemperatureData> _sensorTempData;
   @override
-  List<int> get sensorTempData {
+  List<TemperatureData> get sensorTempData {
     if (_sensorTempData is EqualUnmodifiableListView) return _sensorTempData;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_sensorTempData);
@@ -968,8 +1000,10 @@ class _$BluetoothConnectionStateDataReceivedImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
-    required TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)
+    required TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)
         dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
@@ -985,8 +1019,10 @@ class _$BluetoothConnectionStateDataReceivedImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
-    TResult? Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult? Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
@@ -1002,8 +1038,10 @@ class _$BluetoothConnectionStateDataReceivedImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
-    TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
@@ -1077,14 +1115,14 @@ class _$BluetoothConnectionStateDataReceivedImpl
 abstract class BluetoothConnectionStateDataReceived
     implements BluetoothConnectionState {
   const factory BluetoothConnectionStateDataReceived(
-          {required final List<int> imuData,
-          required final List<int> objectTempData,
-          required final List<int> sensorTempData}) =
+          {required final List<IMUData> imuData,
+          required final List<TemperatureData> objectTempData,
+          required final List<TemperatureData> sensorTempData}) =
       _$BluetoothConnectionStateDataReceivedImpl;
 
-  List<int> get imuData;
-  List<int> get objectTempData;
-  List<int> get sensorTempData;
+  List<IMUData> get imuData;
+  List<TemperatureData> get objectTempData;
+  List<TemperatureData> get sensorTempData;
   @JsonKey(ignore: true)
   _$$BluetoothConnectionStateDataReceivedImplCopyWith<
           _$BluetoothConnectionStateDataReceivedImpl>
@@ -1146,8 +1184,10 @@ class _$BluetoothConnectionStateDisconnectingImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
-    required TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)
+    required TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)
         dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
@@ -1163,8 +1203,10 @@ class _$BluetoothConnectionStateDisconnectingImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
-    TResult? Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult? Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
@@ -1180,8 +1222,10 @@ class _$BluetoothConnectionStateDisconnectingImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
-    TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
@@ -1313,8 +1357,10 @@ class _$BluetoothConnectionStateDisconnectedImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
-    required TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)
+    required TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)
         dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
@@ -1330,8 +1376,10 @@ class _$BluetoothConnectionStateDisconnectedImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
-    TResult? Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult? Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
@@ -1347,8 +1395,10 @@ class _$BluetoothConnectionStateDisconnectedImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
-    TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,
@@ -1508,8 +1558,10 @@ class _$BluetoothConnectionStateErrorImpl
     required TResult Function(List<DiscoveredDevice> devices) observing,
     required TResult Function() connecting,
     required TResult Function() connected,
-    required TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)
+    required TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)
         dataReceived,
     required TResult Function() disconnecting,
     required TResult Function() disconnected,
@@ -1525,8 +1577,10 @@ class _$BluetoothConnectionStateErrorImpl
     TResult? Function(List<DiscoveredDevice> devices)? observing,
     TResult? Function()? connecting,
     TResult? Function()? connected,
-    TResult? Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult? Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult? Function()? disconnecting,
     TResult? Function()? disconnected,
@@ -1542,8 +1596,10 @@ class _$BluetoothConnectionStateErrorImpl
     TResult Function(List<DiscoveredDevice> devices)? observing,
     TResult Function()? connecting,
     TResult Function()? connected,
-    TResult Function(List<int> imuData, List<int> objectTempData,
-            List<int> sensorTempData)?
+    TResult Function(
+            List<IMUData> imuData,
+            List<TemperatureData> objectTempData,
+            List<TemperatureData> sensorTempData)?
         dataReceived,
     TResult Function()? disconnecting,
     TResult Function()? disconnected,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_counter/domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
-import 'package:workout_counter/ui/pages/sensor_data_chart.dart';
 
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
+import '../../domain/models/imu_type.dart';
 import 'bluetooth_connection_page.dart';
-import 'data_chart.dart';
+import 'imu_data_chart.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
         actions: <Widget>[
           BlocBuilder<BluetoothConnectionCubit, BluetoothConnectionState>(
             builder: (context, state) {
@@ -31,17 +31,11 @@ class _HomePageState extends State<HomePage> {
               } else if (state is BluetoothConnectionStateDisconnected) {
                 iconData = Icons.bluetooth_disabled;
               }
-              // Add more conditions based on your states
+              // Add more conditions based on your states.
 
               return IconButton(
                 icon: Icon(iconData),
-                onPressed: () {
-                  context.read<BluetoothConnectionCubit>().startObserving();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BluetoothConnectionPage()),
-                  );
-                },
+                onPressed: bleButtonPressed,
               );
             },
           ),
@@ -50,25 +44,29 @@ class _HomePageState extends State<HomePage> {
       body: BlocBuilder<BluetoothConnectionCubit, BluetoothConnectionState>(
         builder: (context, state) {
           if (state is BluetoothConnectionStateDataReceived) {
-            List<Widget> charts = [];
-            for (int i = 0; i < 6; i++) {
-              if (state.objectTempData[i] != 0 || state.sensorTempData[i] != 0) {
-                charts.add(SensorDataChart(
-                    objectTempData: state.objectTempData, sensorTempData: state.sensorTempData, sensorIndex: i));
-              }
-            }
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  DataChart(dataPoints: state.imuData, title: 'IMU Data'),
-                  ...charts,
+                  IMUDataChart(dataPoints: state.imuData, title: 'IMU Data (acc)', type: IMUType.acc),
+                  IMUDataChart(dataPoints: state.imuData, title: 'IMU Data (gyro)', type: IMUType.gyro),
+                  IMUDataChart(dataPoints: state.imuData, title: 'IMU Data (mag)', type: IMUType.mag),
+                  // ...charts,
                 ],
               ),
             );
           }
-          return Center(child: CircularProgressIndicator());
+
+          return const Center(child: CircularProgressIndicator());
         },
       ),
+    );
+  }
+
+  void bleButtonPressed() {
+    context.read<BluetoothConnectionCubit>().startObserving();
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => BluetoothConnectionPage()),
     );
   }
 }

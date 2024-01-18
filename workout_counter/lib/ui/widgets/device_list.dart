@@ -26,8 +26,30 @@ class DeviceList extends StatelessWidget {
               );
             },
           );
+        } else if (state is BluetoothConnectionStateConnecting) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is BluetoothConnectionStateConnected) {
+          return const Center(
+            child: Text('Connected to device'),
+          );
+        } else if (state is BluetoothConnectionStateDisconnected) {
+          return const Center(
+            child: Text('Disconnected from device'),
+          );
+        } else if (state is BluetoothConnectionStateError) {
+          return const Center(
+            child: Text('Error'),
+          );
+        } else if (state is BluetoothConnectionStateDataReceived) {
+          return const Center(
+            child: Text('Connected and data received'),
+          );
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: Text('Unknown state'),
+          );
         }
       },
     );

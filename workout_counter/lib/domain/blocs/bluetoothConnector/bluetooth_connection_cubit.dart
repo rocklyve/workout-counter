@@ -12,10 +12,9 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
   final FlutterReactiveBle _flutterReactiveBle = FlutterReactiveBle();
   StreamSubscription? _scanSubscription;
   StreamSubscription<ConnectionStateUpdate>? _connection;
-  QualifiedCharacteristic? _dataCharacteristic;
   final List<DiscoveredDevice> _discoveredDevices = [];
-  final int _amountOfDataPoints = 500;
-  List<IMUData> _receivedIMUData = [];
+  final int _amountOfDataPoints = 200;
+  List<IMUData> _receivedIMUData = <IMUData>[];
   List<TemperatureData> _receivedObjTemperatureData = [];
   List<TemperatureData> _receivedSensorTemperatureData = [];
 
@@ -35,7 +34,8 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
       (device) {
         if (device.name.contains('DataTracker') && !_discoveredDevices.contains(device)) {
           print('add device: ${device.name}, ${device.id}');
-          _discoveredDevices.add(device);
+          // If device is not already in the list, don't add it.
+          if (!_discoveredDevices.contains(device)) _discoveredDevices.add(device);
           emit(BluetoothConnectionState.observing(devices: _discoveredDevices));
         }
       },
@@ -44,8 +44,6 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
       },
     );
   }
-
-  List<DiscoveredDevice> get discoveredDevices => List.unmodifiable(_discoveredDevices);
 
   Future<void> connectToDevice(String deviceId) async {
     emit(const BluetoothConnectionState.connecting());
@@ -85,16 +83,16 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
       final services = await _flutterReactiveBle.getDiscoveredServices(deviceId);
       print('services: $services');
       final targetService = services.firstWhere(
-        (service) => service.id.toString() == "001a",
+        (service) => service.id.toString() == '001a',
       );
 
       if (targetService != null) {
-        await _subscribeToCharacteristic(targetService, deviceId, "200A"); // imuCharacteristic
-        await _subscribeToCharacteristic(targetService, deviceId, "200B"); // objectTempCharacteristic
-        await _subscribeToCharacteristic(targetService, deviceId, "200C"); // sensorTempCharacteristic
-        emit(BluetoothConnectionState.connected());
+        await _subscribeToCharacteristic(targetService, deviceId, '200A'); // ImuCharacteristic.
+        await _subscribeToCharacteristic(targetService, deviceId, '200B'); // ObjectTempCharacteristic.
+        await _subscribeToCharacteristic(targetService, deviceId, '200C'); // SensorTempCharacteristic.
+        emit(const BluetoothConnectionState.connected());
       } else {
-        emit(BluetoothConnectionState.error("Target service not found"));
+        emit(const BluetoothConnectionState.error('Target service not found'));
       }
     } catch (e) {
       emit(BluetoothConnectionState.error(e.toString()));
@@ -110,9 +108,9 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
 
     StreamSubscription _ = _flutterReactiveBle.subscribeToCharacteristic(characteristic).listen(
       (data) {
-        // Handle received data for each characteristic
+        // Handle received data for each characteristic.
         String receivedString = String.fromCharCodes(data);
-        // print("Received data from $characteristicUuid: $receivedString");
+        // Print("Received data from $characteristicUuid: $receivedString");.
         IMUData? imuData = _getIMUData(receivedString, characteristicUuid);
         if (imuData != null) _receivedIMUData.add(imuData);
         if (_receivedIMUData.length > _amountOfDataPoints) _receivedIMUData.removeAt(0);
@@ -125,7 +123,7 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
         if (sensorTempData != null) _receivedSensorTemperatureData.add(sensorTempData);
         if (_receivedSensorTemperatureData.length > _amountOfDataPoints) _receivedSensorTemperatureData.removeAt(0);
 
-        // Create new instances of the lists for the new state
+        // Create new instances of the lists for the new state.
         var newIMUData = List<IMUData>.of(_receivedIMUData);
         var newObjTempData = List<TemperatureData>.of(_receivedObjTemperatureData);
         var newSensorTempData = List<TemperatureData>.of(_receivedSensorTemperatureData);

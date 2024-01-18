@@ -9,10 +9,7 @@ import 'home_page.dart';
 class App extends StatelessWidget {
   const App({
     super.key,
-    // required this.database,
   });
-
-  // final Database database;
 
   @override
   Widget build(BuildContext context) {

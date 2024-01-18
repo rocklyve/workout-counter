@@ -10,7 +10,7 @@ class IMUDataChart extends StatelessWidget {
   final String title;
   final IMUType type;
 
-  IMUDataChart({required this.dataPoints, required this.title, required this.type});
+  const IMUDataChart({super.key, required this.dataPoints, required this.title, required this.type});
 
   Tuple3<List<double>, List<double>, List<double>> _getDataPoints() {
     switch (type) {
@@ -44,37 +44,40 @@ class IMUDataChart extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          child: Text(
+            title,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
         ),
         Container(
           height: 200,
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: LineChart(
             LineChartData(
-              gridData: FlGridData(show: false),
-              titlesData: FlTitlesData(show: false),
+              gridData: const FlGridData(show: false),
+              titlesData: const FlTitlesData(show: false),
               borderData: FlBorderData(show: false),
               lineBarsData: [
                 LineChartBarData(
                   spots: data.item1.asMap().entries.map((e) => FlSpot(e.key.toDouble(), e.value.toDouble())).toList(),
                   isCurved: true,
-                  dotData: FlDotData(show: false),
+                  dotData: const FlDotData(show: false),
                   belowBarData: BarAreaData(show: false),
                 ),
                 LineChartBarData(
                   spots: data.item2.asMap().entries.map((e) => FlSpot(e.key.toDouble(), e.value.toDouble())).toList(),
                   isCurved: true,
-                  dotData: FlDotData(show: false),
+                  dotData: const FlDotData(show: false),
                   belowBarData: BarAreaData(show: false),
                 ),
                 LineChartBarData(
                   spots: data.item3.asMap().entries.map((e) => FlSpot(e.key.toDouble(), e.value.toDouble())).toList(),
                   isCurved: true,
-                  dotData: FlDotData(show: false),
+                  dotData: const FlDotData(show: false),
                   belowBarData: BarAreaData(show: false),
                 ),
               ],
-              lineTouchData: LineTouchData(enabled: false),
+              lineTouchData: const LineTouchData(enabled: false),
             ),
           ),
         ),

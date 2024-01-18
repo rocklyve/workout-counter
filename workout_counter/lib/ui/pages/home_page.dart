@@ -4,8 +4,8 @@ import 'package:workout_counter/domain/blocs/bluetoothConnector/bluetooth_connec
 
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
 import '../../domain/models/imu_type.dart';
+import '../widgets/imu_data_chart.dart';
 import 'bluetooth_connection_page.dart';
-import 'imu_data_chart.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -50,7 +50,6 @@ class _HomePageState extends State<HomePage> {
                   IMUDataChart(dataPoints: state.imuData, title: 'IMU Data (acc)', type: IMUType.acc),
                   IMUDataChart(dataPoints: state.imuData, title: 'IMU Data (gyro)', type: IMUType.gyro),
                   IMUDataChart(dataPoints: state.imuData, title: 'IMU Data (mag)', type: IMUType.mag),
-                  // ...charts,
                 ],
               ),
             );

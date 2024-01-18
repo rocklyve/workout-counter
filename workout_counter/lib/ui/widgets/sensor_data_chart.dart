@@ -19,31 +19,34 @@ class SensorDataChart extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('Sensor ${sensorIndex + 1}', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          child: Text(
+            'Sensor ${sensorIndex + 1}',
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
         ),
         Container(
           height: 200,
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: LineChart(
             LineChartData(
-              gridData: FlGridData(show: false),
-              titlesData: FlTitlesData(show: false),
+              gridData: const FlGridData(show: false),
+              titlesData: const FlTitlesData(show: false),
               borderData: FlBorderData(show: false),
               lineBarsData: [
                 LineChartBarData(
                   spots: [FlSpot(0, objectTempData[sensorIndex].toDouble())],
                   isCurved: true,
-                  dotData: FlDotData(show: false),
+                  dotData: const FlDotData(show: false),
                   color: Colors.blue,
                 ),
                 LineChartBarData(
                   spots: [FlSpot(1, sensorTempData[sensorIndex].toDouble())],
                   isCurved: true,
-                  dotData: FlDotData(show: false),
+                  dotData: const FlDotData(show: false),
                   color: Colors.red,
                 ),
               ],
-              lineTouchData: LineTouchData(enabled: false),
+              lineTouchData: const LineTouchData(enabled: false),
             ),
           ),
         ),

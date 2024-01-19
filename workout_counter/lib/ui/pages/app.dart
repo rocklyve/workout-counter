@@ -4,12 +4,15 @@ import 'package:workout_counter/domain/blocs/bluetoothConnector/bluetooth_connec
 
 import '../../domain/repositories/data_repository.dart';
 import '../../domain/repositories/data_repository_impl.dart';
-import 'home_page.dart';
+import '../../routing/router.dart';
 
 class App extends StatelessWidget {
-  const App({
+  App({
     super.key,
+    required this.appRouter,
   });
+
+  AppRouter appRouter;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +33,8 @@ class App extends StatelessWidget {
             ],
             child: Builder(
               builder: (context) {
-                return const MaterialApp(
-                  home: HomePage(),
+                return MaterialApp.router(
+                  routerConfig: appRouter.config(),
                 );
               },
             ),

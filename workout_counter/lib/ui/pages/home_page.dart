@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_counter/domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
@@ -7,6 +8,7 @@ import '../../domain/models/imu_type.dart';
 import '../widgets/imu_data_chart.dart';
 import 'bluetooth_connection_page.dart';
 
+@RoutePage()
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 

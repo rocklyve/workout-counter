@@ -5,10 +5,9 @@ import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:workout_counter/domain/models/imu_data.dart';
 
 import '../../models/temperature_data.dart';
-import 'bluetooth_connection_state.dart' as bluetoothConnectionState;
 import 'bluetooth_connection_state.dart';
 
-class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothConnectionState> {
+class BluetoothConnectionCubit extends Cubit<BluetoothConnectionState> {
   final FlutterReactiveBle _flutterReactiveBle = FlutterReactiveBle();
   StreamSubscription? _scanSubscription;
   StreamSubscription<ConnectionStateUpdate>? _connection;
@@ -18,7 +17,7 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
   List<TemperatureData> _receivedObjTemperatureData = [];
   List<TemperatureData> _receivedSensorTemperatureData = [];
 
-  BluetoothConnectionCubit() : super(const bluetoothConnectionState.BluetoothConnectionState.initial());
+  BluetoothConnectionCubit() : super(const BluetoothConnectionState.initial());
 
   void startObserving() {
     if (_scanSubscription != null) {
@@ -72,7 +71,7 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
 
   Future<void> stopObserving() async {
     _scanSubscription?.cancel();
-    emit(const bluetoothConnectionState.BluetoothConnectionState.initial());
+    emit(const BluetoothConnectionState.initial());
   }
 
   @override

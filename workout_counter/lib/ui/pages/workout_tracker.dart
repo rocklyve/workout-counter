@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_counter/domain/blocs/workoutTracker/workout_tracker_state.dart';
 
-import '../../domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
-import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
+import '../../domain/blocs/workoutTracker/workout_tracker_cubit.dart';
 
 @RoutePage()
 class WorkoutTrackerPage extends StatefulWidget {
@@ -21,19 +21,18 @@ class _WorkoutTrackerPageState extends State<WorkoutTrackerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Workout Tracker'),
-      ),
-      body: BlocBuilder<BluetoothConnectionCubit, BluetoothConnectionState>(
-        builder: (context, state) {
-          if (state is BluetoothConnectionStateDataReceived) {
-            return Container();
-          }
+    return BlocBuilder<WorkoutTrackerCubit, WorkoutTrackerState>(
+      builder: (context, state) {
+        if (state is WorkoutTrackerStateCounting) {
+          return Center(
+            child: Text('Push-ups: ${state.pushUpCounter}'),
+          );
+        }
 
-          return const Center(child: CircularProgressIndicator());
-        },
-      ),
+        return const Center(
+          child: Text('Counter not started yet'),
+        );
+      },
     );
   }
 }

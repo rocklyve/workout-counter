@@ -5,8 +5,8 @@ import 'package:workout_counter/domain/blocs/bluetoothConnector/bluetooth_connec
 
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
 import '../../domain/models/imu_type.dart';
+import '../../routing/router.dart';
 import '../widgets/imu_data_chart.dart';
-import 'bluetooth_connection_page.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -27,17 +27,20 @@ class _HomePageState extends State<HomePage> {
             builder: (context, state) {
               IconData iconData = Icons.bluetooth;
               if (state is BluetoothConnectionStateConnected) {
+                print('state updated: connected');
                 iconData = Icons.bluetooth_connected;
               } else if (state is BluetoothConnectionStateConnecting) {
+                print('state updated: connecting');
                 iconData = Icons.bluetooth_searching;
               } else if (state is BluetoothConnectionStateDisconnected) {
+                print('state updated: disconnected');
                 iconData = Icons.bluetooth_disabled;
               }
               // Add more conditions based on your states.
 
               return IconButton(
                 icon: Icon(iconData),
-                onPressed: bleButtonPressed,
+                onPressed: () => bleButtonPressed(context),
               );
             },
           ),
@@ -63,11 +66,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void bleButtonPressed() {
+  void bleButtonPressed(BuildContext context) {
     context.read<BluetoothConnectionCubit>().startObserving();
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => BluetoothConnectionPage()),
-    );
+
+    context.router.push(const BluetoothConnectionRoute());
   }
 }

@@ -27,6 +27,12 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const BasePage(),
       );
     },
+    BluetoothConnectionRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const BluetoothConnectionPage(),
+      );
+    },
     FeedRoute.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -49,6 +55,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const StatsPage(),
+      );
+    },
+    WorkoutTrackerRoute.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const WorkoutTrackerPage(),
       );
     },
   };
@@ -78,6 +90,20 @@ class BaseRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'BaseRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [BluetoothConnectionPage]
+class BluetoothConnectionRoute extends PageRouteInfo<void> {
+  const BluetoothConnectionRoute({List<PageRouteInfo>? children})
+      : super(
+          BluetoothConnectionRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'BluetoothConnectionRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
@@ -134,6 +160,20 @@ class StatsRoute extends PageRouteInfo<void> {
         );
 
   static const String name = 'StatsRoute';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [WorkoutTrackerPage]
+class WorkoutTrackerRoute extends PageRouteInfo<void> {
+  const WorkoutTrackerRoute({List<PageRouteInfo>? children})
+      : super(
+          WorkoutTrackerRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'WorkoutTrackerRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -5,6 +6,7 @@ import '../../domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
 import '../widgets/device_list.dart';
 
+@RoutePage()
 class BluetoothConnectionPage extends StatelessWidget {
   const BluetoothConnectionPage({super.key});
 
@@ -16,9 +18,9 @@ class BluetoothConnectionPage extends StatelessWidget {
   void _bleListener(BuildContext context, BluetoothConnectionState state) {
     // print('current state: $state');
     if (state is BluetoothConnectionStateError) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(state.message)),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(content: Text(state.message)),
+      // );
     }
   }
 
@@ -35,15 +37,17 @@ class BluetoothConnectionPage extends StatelessWidget {
         builder: (context, state) {
           if (state is BluetoothConnectionStateConnected ||
               (state is BluetoothConnectionStateObserving && state.devices.isEmpty)) {
-            return const Center(
-              child: Text('Connected to device'),
+            RefreshIndicator(
+              onRefresh: () => _onRefresh(context),
+              child: const Center(
+                child: Text('Connected to device'),
+              ),
             );
           }
-          final cubit = context.read<BluetoothConnectionCubit>();
 
           return RefreshIndicator(
             onRefresh: () => _onRefresh(context),
-            child: DeviceList(cubit: cubit),
+            child: DeviceList(cubit: context.read<BluetoothConnectionCubit>()),
           );
         },
       ),

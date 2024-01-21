@@ -59,6 +59,10 @@ class BluetoothConnectionCubit extends Cubit<bluetoothConnectionState.BluetoothC
             update.connectionState == DeviceConnectionState.connecting) {
           _discoverServices(deviceId);
         }
+
+        if (update.connectionState == DeviceConnectionState.disconnected) {
+          emit(const BluetoothConnectionState.disconnected());
+        }
       },
       onError: (error) {
         emit(BluetoothConnectionState.error(error.toString()));

@@ -7,6 +7,7 @@ import 'package:workout_counter/ui/widgets/sensor_data_chart.dart';
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
 import '../../domain/models/imu_type.dart';
 import '../../routing/router.dart';
+import '../widgets/custom_app_bar.dart';
 import '../widgets/imu_data_chart.dart';
 
 @RoutePage()
@@ -21,8 +22,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
+      appBar: CustomAppBar(
+        title: 'Home',
         actions: <Widget>[
           BlocBuilder<BluetoothConnectionCubit, BluetoothConnectionState>(
             builder: (context, state) {

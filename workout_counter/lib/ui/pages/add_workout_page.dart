@@ -6,6 +6,7 @@ import 'package:workout_counter/routing/router.dart';
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
 import '../../domain/blocs/workoutTracker/workout_tracker_cubit.dart';
+import '../widgets/custom_app_bar.dart';
 
 @RoutePage()
 class AddWorkoutPage extends StatefulWidget {
@@ -49,7 +50,7 @@ class _AddWorkoutPageState extends State<AddWorkoutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Workout')),
+      appBar: const CustomAppBar(title: 'Add Workout'),
       body: Form(
         key: _formKey,
         child: Padding(

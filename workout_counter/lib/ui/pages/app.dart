@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:workout_counter/domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
 
 import '../../domain/blocs/workoutTracker/workout_tracker_cubit.dart';
@@ -14,6 +15,14 @@ class App extends StatelessWidget {
   });
 
   AppRouter appRouter;
+
+  ThemeData _buildTheme(brightness) {
+    var baseTheme = ThemeData(brightness: brightness);
+
+    return baseTheme.copyWith(
+      textTheme: GoogleFonts.interTextTheme(baseTheme.textTheme),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +51,7 @@ class App extends StatelessWidget {
               builder: (context) {
                 return MaterialApp.router(
                   routerConfig: appRouter.config(),
+                  theme: _buildTheme(Brightness.light),
                 );
               },
             ),

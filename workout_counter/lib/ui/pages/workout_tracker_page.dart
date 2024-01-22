@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_counter/domain/blocs/workoutTracker/workout_tracker_state.dart';
 
 import '../../domain/blocs/workoutTracker/workout_tracker_cubit.dart';
+import '../widgets/custom_app_bar.dart';
 
 @RoutePage()
 class WorkoutTrackerPage extends StatefulWidget {
@@ -23,8 +24,8 @@ class _WorkoutTrackerPageState extends State<WorkoutTrackerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Tracker'),
+      appBar: const CustomAppBar(
+        title: 'Tracker',
       ),
       body: BlocBuilder<WorkoutTrackerCubit, WorkoutTrackerState>(
         builder: (context, state) {

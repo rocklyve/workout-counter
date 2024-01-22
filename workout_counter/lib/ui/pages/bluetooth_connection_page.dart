@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
+import '../widgets/custom_app_bar.dart';
 import '../widgets/device_list.dart';
 
 @RoutePage()
@@ -29,8 +30,8 @@ class BluetoothConnectionPage extends StatelessWidget {
     print('BluetoothConnectionPage build');
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BLE Connection'),
+      appBar: const CustomAppBar(
+        title: 'BLE Connection',
       ),
       body: BlocConsumer<BluetoothConnectionCubit, BluetoothConnectionState>(
         listener: _bleListener,

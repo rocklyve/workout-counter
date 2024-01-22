@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_counter/ui/widgets/custom_app_bar.dart';
 
 @RoutePage()
 class StatsPage extends StatefulWidget {
@@ -18,7 +19,7 @@ class _StatsPageState extends State<StatsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Stats Page')),
+      appBar: const CustomAppBar(title: 'Stats Page'),
       body: Container(),
     );
   }

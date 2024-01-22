@@ -3,6 +3,9 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - Protobuf (3.21.12)
   - reactive_ble_mobile (0.0.1):
     - Flutter
@@ -15,6 +18,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - reactive_ble_mobile (from `.symlinks/plugins/reactive_ble_mobile/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
@@ -27,6 +31,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   reactive_ble_mobile:
     :path: ".symlinks/plugins/reactive_ble_mobile/ios"
   sqflite:
@@ -35,6 +41,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  path_provider_foundation: 3784922295ac71e43754bd15e0653ccfd36a147c
   Protobuf: 120350fc38646e2dedc26f49ecba778184ea1de2
   reactive_ble_mobile: 9ce6723d37ccf701dbffd202d487f23f5de03b4c
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a

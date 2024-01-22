@@ -43,7 +43,7 @@ class _WorkoutTrackerPageState extends State<WorkoutTrackerPage> {
                         Shadow(
                           blurRadius: 10.0,
                           color: Colors.black.withOpacity(0.3),
-                          offset: const Offset(5.0, 5.0),
+                          offset: const Offset(2.0, 3.0),
                         ),
                       ],
                     ),

@@ -155,7 +155,29 @@ class BluetoothConnectionCubit extends Cubit<BluetoothConnectionState> {
 
   TemperatureData? _getObjTempData(String receivedString, String characteristicUuid) {
     if (characteristicUuid == '200B') {
-      return TemperatureData.fromString(receivedString);
+      TemperatureData data = TemperatureData.fromString(receivedString);
+      if (_receivedObjTemperatureData.isNotEmpty) {
+        data.temperatureSensor1 = data.temperatureSensor1 == 0
+            ? _receivedObjTemperatureData.last.temperatureSensor1
+            : data.temperatureSensor1;
+        data.temperatureSensor2 = data.temperatureSensor2 == 0
+            ? _receivedObjTemperatureData.last.temperatureSensor2
+            : data.temperatureSensor2;
+        data.temperatureSensor3 = data.temperatureSensor3 == 0
+            ? _receivedObjTemperatureData.last.temperatureSensor3
+            : data.temperatureSensor3;
+        data.temperatureSensor4 = data.temperatureSensor4 == 0
+            ? _receivedObjTemperatureData.last.temperatureSensor4
+            : data.temperatureSensor4;
+        data.temperatureSensor5 = data.temperatureSensor5 == 0
+            ? _receivedObjTemperatureData.last.temperatureSensor5
+            : data.temperatureSensor5;
+        data.temperatureSensor6 = data.temperatureSensor6 == 0
+            ? _receivedObjTemperatureData.last.temperatureSensor6
+            : data.temperatureSensor6;
+      }
+
+      return data;
     }
 
     return null;
@@ -163,9 +185,31 @@ class BluetoothConnectionCubit extends Cubit<BluetoothConnectionState> {
 
   TemperatureData? _getSensorTempData(String receivedString, String characteristicUuid) {
     if (characteristicUuid == '200C') {
-      return TemperatureData.fromString(receivedString);
-    }
+      TemperatureData data = TemperatureData.fromString(receivedString);
+      if (_receivedSensorTemperatureData.isNotEmpty) {
+        data.temperatureSensor1 = data.temperatureSensor1 == 0
+            ? _receivedSensorTemperatureData.last.temperatureSensor1
+            : data.temperatureSensor1;
+        data.temperatureSensor2 = data.temperatureSensor2 == 0
+            ? _receivedSensorTemperatureData.last.temperatureSensor2
+            : data.temperatureSensor2;
+        data.temperatureSensor3 = data.temperatureSensor3 == 0
+            ? _receivedSensorTemperatureData.last.temperatureSensor3
+            : data.temperatureSensor3;
+        data.temperatureSensor4 = data.temperatureSensor4 == 0
+            ? _receivedSensorTemperatureData.last.temperatureSensor4
+            : data.temperatureSensor4;
+        data.temperatureSensor5 = data.temperatureSensor5 == 0
+            ? _receivedSensorTemperatureData.last.temperatureSensor5
+            : data.temperatureSensor5;
+        data.temperatureSensor6 = data.temperatureSensor6 == 0
+            ? _receivedSensorTemperatureData.last.temperatureSensor6
+            : data.temperatureSensor6;
 
-    return null;
+        return data;
+      }
+
+      return null;
+    }
   }
 }

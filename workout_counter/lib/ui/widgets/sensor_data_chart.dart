@@ -1,12 +1,14 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_counter/domain/models/temperature_data.dart';
 
 class SensorDataChart extends StatelessWidget {
-  final List<int> objectTempData;
-  final List<int> sensorTempData;
+  final List<TemperatureData> objectTempData;
+  final List<TemperatureData> sensorTempData;
   final int sensorIndex;
 
-  SensorDataChart({
+  const SensorDataChart({
+    super.key,
     required this.objectTempData,
     required this.sensorTempData,
     required this.sensorIndex,
@@ -34,13 +36,21 @@ class SensorDataChart extends StatelessWidget {
               borderData: FlBorderData(show: false),
               lineBarsData: [
                 LineChartBarData(
-                  spots: [FlSpot(0, objectTempData[sensorIndex].toDouble())],
                   isCurved: true,
+                  spots: objectTempData
+                      .asMap()
+                      .entries
+                      .map((e) => FlSpot(e.key.toDouble(), e.value.getSensorValue(sensorIndex)))
+                      .toList(),
                   dotData: const FlDotData(show: false),
                   color: Colors.blue,
                 ),
                 LineChartBarData(
-                  spots: [FlSpot(1, sensorTempData[sensorIndex].toDouble())],
+                  spots: sensorTempData
+                      .asMap()
+                      .entries
+                      .map((e) => FlSpot(e.key.toDouble(), e.value.getSensorValue(sensorIndex)))
+                      .toList(),
                   isCurved: true,
                   dotData: const FlDotData(show: false),
                   color: Colors.red,

@@ -26,6 +26,7 @@ class WorkoutTrackerCubit extends Cubit<WorkoutTrackerState> {
     if (bluetoothConnectionCubit.state is BluetoothConnectionStateConnected ||
         bluetoothConnectionCubit.state is BluetoothConnectionStateDataReceived) {
       emit(const WorkoutTrackerStateCounting(pushUpCounter: 0));
+      _pushUpCounter = 0;
       _subscribeToIMUData();
     } else {
       emit(const WorkoutTrackerStateError('No device connected'));
@@ -52,7 +53,7 @@ class WorkoutTrackerCubit extends Cubit<WorkoutTrackerState> {
     // Implement push-up detection logic based on IMU data
     print('Z (ACC): ${imuData.last.accData.z}, (GYRO): ${imuData.last.gyroData.z}');
     const double pushUpStartThreshold = 20; // Adjust based on your data
-    const double pushUpEndThreshold = 2; // Adjust based on your data
+    const double pushUpEndThreshold = -10; // Adjust based on your data
 
     IMUData latestData = imuData.last;
 
@@ -61,9 +62,9 @@ class WorkoutTrackerCubit extends Cubit<WorkoutTrackerState> {
       return false;
     }
 
-    if (!_isInPushup && latestData.gyroData.z < pushUpStartThreshold) {
+    if (!_isInPushup && latestData.gyroData.z > pushUpStartThreshold) {
       _isInPushup = true;
-    } else if (_isInPushup && latestData.gyroData.z > pushUpEndThreshold) {
+    } else if (_isInPushup && latestData.gyroData.z < pushUpEndThreshold) {
       _isInPushup = false;
       return true;
     }

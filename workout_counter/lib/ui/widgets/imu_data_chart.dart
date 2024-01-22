@@ -44,44 +44,61 @@ class IMUDataChart extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text(
-            title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        ),
-        Container(
-          height: 200,
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: LineChart(
-            LineChartData(
-              gridData: const FlGridData(show: false),
-              titlesData: const FlTitlesData(show: false),
-              borderData: FlBorderData(show: false),
-              lineBarsData: [
-                LineChartBarData(
-                  spots: data.item1.asMap().entries.map((e) => FlSpot(e.key.toDouble(), e.value.toDouble())).toList(),
-                  isCurved: true,
-                  dotData: const FlDotData(show: false),
-                  color: Colors.red,
-                  belowBarData: BarAreaData(show: false),
+          child: Column(
+            children: [
+              Text(
+                title,
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              Container(
+                height: 200,
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: LineChart(
+                  LineChartData(
+                    gridData: const FlGridData(show: false),
+                    titlesData: const FlTitlesData(show: false),
+                    borderData: FlBorderData(show: false),
+                    lineBarsData: [
+                      LineChartBarData(
+                        spots: data.item1
+                            .asMap()
+                            .entries
+                            .map((e) => FlSpot(e.key.toDouble(), e.value.toDouble()))
+                            .toList(),
+                        isCurved: true,
+                        dotData: const FlDotData(show: false),
+                        color: Colors.red,
+                        belowBarData: BarAreaData(show: false),
+                      ),
+                      LineChartBarData(
+                        spots: data.item2
+                            .asMap()
+                            .entries
+                            .map((e) => FlSpot(e.key.toDouble(), e.value.toDouble()))
+                            .toList(),
+                        isCurved: true,
+                        dotData: const FlDotData(show: false),
+                        color: Colors.green,
+                        belowBarData: BarAreaData(show: false),
+                      ),
+                      LineChartBarData(
+                        spots: data.item3
+                            .asMap()
+                            .entries
+                            .map((e) => FlSpot(e.key.toDouble(), e.value.toDouble()))
+                            .toList(),
+                        isCurved: true,
+                        dotData: const FlDotData(show: false),
+                        color: Colors.blue,
+                        belowBarData: BarAreaData(show: false),
+                      ),
+                    ],
+                    lineTouchData: const LineTouchData(enabled: false),
+                  ),
                 ),
-                LineChartBarData(
-                  spots: data.item2.asMap().entries.map((e) => FlSpot(e.key.toDouble(), e.value.toDouble())).toList(),
-                  isCurved: true,
-                  dotData: const FlDotData(show: false),
-                  color: Colors.green,
-                  belowBarData: BarAreaData(show: false),
-                ),
-                LineChartBarData(
-                  spots: data.item3.asMap().entries.map((e) => FlSpot(e.key.toDouble(), e.value.toDouble())).toList(),
-                  isCurved: true,
-                  dotData: const FlDotData(show: false),
-                  color: Colors.blue,
-                  belowBarData: BarAreaData(show: false),
-                ),
-              ],
-              lineTouchData: const LineTouchData(enabled: false),
-            ),
+              ),
+            ],
           ),
         ),
       ],

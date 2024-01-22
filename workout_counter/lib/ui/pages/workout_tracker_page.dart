@@ -2,10 +2,13 @@ import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_counter/domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
 import 'package:workout_counter/domain/blocs/workoutTracker/workout_tracker_state.dart';
 
+import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
 import '../../domain/blocs/workoutTracker/workout_tracker_cubit.dart';
 import '../widgets/custom_app_bar.dart';
+import '../widgets/sensor_data_chart.dart';
 
 @RoutePage()
 class WorkoutTrackerPage extends StatefulWidget {
@@ -16,6 +19,59 @@ class WorkoutTrackerPage extends StatefulWidget {
 }
 
 class _WorkoutTrackerPageState extends State<WorkoutTrackerPage> {
+  Widget _buildTemperatureCharts() {
+    return BlocBuilder<BluetoothConnectionCubit, BluetoothConnectionState>(
+      builder: (context, state) {
+        return (state is BluetoothConnectionStateDataReceived)
+            ? Column(children: [
+                Row(children: [
+                  Expanded(
+                      child: SensorDataChart(
+                    objectTempData: state.objectTempData,
+                    sensorTempData: state.sensorTempData,
+                    sensorIndex: 0,
+                  )),
+                  Expanded(
+                      child: SensorDataChart(
+                    objectTempData: state.objectTempData,
+                    sensorTempData: state.sensorTempData,
+                    sensorIndex: 1,
+                  )),
+                ]),
+                Row(children: [
+                  Expanded(
+                      child: SensorDataChart(
+                    objectTempData: state.objectTempData,
+                    sensorTempData: state.sensorTempData,
+                    sensorIndex: 2,
+                  )),
+                  Expanded(
+                      child: SensorDataChart(
+                    objectTempData: state.objectTempData,
+                    sensorTempData: state.sensorTempData,
+                    sensorIndex: 3,
+                  )),
+                ]),
+                Row(children: [
+                  Expanded(
+                      child: SensorDataChart(
+                    objectTempData: state.objectTempData,
+                    sensorTempData: state.sensorTempData,
+                    sensorIndex: 4,
+                  )),
+                  Expanded(
+                      child: SensorDataChart(
+                    objectTempData: state.objectTempData,
+                    sensorTempData: state.sensorTempData,
+                    sensorIndex: 5,
+                  )),
+                ]),
+              ])
+            : Container();
+      },
+    );
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -51,6 +107,7 @@ class _WorkoutTrackerPageState extends State<WorkoutTrackerPage> {
                   ),
                   const SizedBox(height: 20),
                   // button which closes the page
+                  _buildTemperatureCharts(),
                   ElevatedButton(
                     onPressed: () {
                       context.router.pop();

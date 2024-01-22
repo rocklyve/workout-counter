@@ -16,51 +16,52 @@ class SensorDataChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
             'Sensor ${sensorIndex + 1}',
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-        ),
-        Container(
-          height: 200,
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: LineChart(
-            LineChartData(
-              gridData: const FlGridData(show: false),
-              titlesData: const FlTitlesData(show: false),
-              borderData: FlBorderData(show: false),
-              lineBarsData: [
-                LineChartBarData(
-                  isCurved: true,
-                  spots: objectTempData
-                      .asMap()
-                      .entries
-                      .map((e) => FlSpot(e.key.toDouble(), e.value.getSensorValue(sensorIndex)))
-                      .toList(),
-                  dotData: const FlDotData(show: false),
-                  color: Colors.blue,
-                ),
-                LineChartBarData(
-                  spots: sensorTempData
-                      .asMap()
-                      .entries
-                      .map((e) => FlSpot(e.key.toDouble(), e.value.getSensorValue(sensorIndex)))
-                      .toList(),
-                  isCurved: true,
-                  dotData: const FlDotData(show: false),
-                  color: Colors.red,
-                ),
-              ],
-              lineTouchData: const LineTouchData(enabled: false),
+          const SizedBox(height: 8),
+          Container(
+            height: 100,
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: LineChart(
+              LineChartData(
+                gridData: const FlGridData(show: false),
+                titlesData: const FlTitlesData(show: false),
+                borderData: FlBorderData(show: false),
+                lineBarsData: [
+                  LineChartBarData(
+                    isCurved: true,
+                    spots: objectTempData
+                        .asMap()
+                        .entries
+                        .map((e) => FlSpot(e.key.toDouble(), e.value.getSensorValue(sensorIndex)))
+                        .toList(),
+                    dotData: const FlDotData(show: false),
+                    color: Colors.blue,
+                  ),
+                  LineChartBarData(
+                    spots: sensorTempData
+                        .asMap()
+                        .entries
+                        .map((e) => FlSpot(e.key.toDouble(), e.value.getSensorValue(sensorIndex)))
+                        .toList(),
+                    isCurved: true,
+                    dotData: const FlDotData(show: false),
+                    color: Colors.red,
+                  ),
+                ],
+                lineTouchData: const LineTouchData(enabled: false),
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

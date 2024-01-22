@@ -57,35 +57,59 @@ class _HomePageState extends State<HomePage> {
                   IMUDataChart(dataPoints: state.imuData, title: 'IMU Data (acc)', type: IMUType.acc),
                   IMUDataChart(dataPoints: state.imuData, title: 'IMU Data (gyro)', type: IMUType.gyro),
                   IMUDataChart(dataPoints: state.imuData, title: 'IMU Data (mag)', type: IMUType.mag),
-                  SensorDataChart(
-                    objectTempData: state.objectTempData,
-                    sensorTempData: state.sensorTempData,
-                    sensorIndex: 0,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SensorDataChart(
+                          objectTempData: state.objectTempData,
+                          sensorTempData: state.sensorTempData,
+                          sensorIndex: 0,
+                        ),
+                      ),
+                      Expanded(
+                        child: SensorDataChart(
+                          objectTempData: state.objectTempData,
+                          sensorTempData: state.sensorTempData,
+                          sensorIndex: 1,
+                        ),
+                      ),
+                    ],
                   ),
-                  SensorDataChart(
-                    objectTempData: state.objectTempData,
-                    sensorTempData: state.sensorTempData,
-                    sensorIndex: 1,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SensorDataChart(
+                          objectTempData: state.objectTempData,
+                          sensorTempData: state.sensorTempData,
+                          sensorIndex: 2,
+                        ),
+                      ),
+                      Expanded(
+                        child: SensorDataChart(
+                          objectTempData: state.objectTempData,
+                          sensorTempData: state.sensorTempData,
+                          sensorIndex: 3,
+                        ),
+                      ),
+                    ],
                   ),
-                  SensorDataChart(
-                    objectTempData: state.objectTempData,
-                    sensorTempData: state.sensorTempData,
-                    sensorIndex: 2,
-                  ),
-                  SensorDataChart(
-                    objectTempData: state.objectTempData,
-                    sensorTempData: state.sensorTempData,
-                    sensorIndex: 3,
-                  ),
-                  SensorDataChart(
-                    objectTempData: state.objectTempData,
-                    sensorTempData: state.sensorTempData,
-                    sensorIndex: 4,
-                  ),
-                  SensorDataChart(
-                    objectTempData: state.objectTempData,
-                    sensorTempData: state.sensorTempData,
-                    sensorIndex: 5,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: SensorDataChart(
+                          objectTempData: state.objectTempData,
+                          sensorTempData: state.sensorTempData,
+                          sensorIndex: 4,
+                        ),
+                      ),
+                      Expanded(
+                        child: SensorDataChart(
+                          objectTempData: state.objectTempData,
+                          sensorTempData: state.sensorTempData,
+                          sensorIndex: 5,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

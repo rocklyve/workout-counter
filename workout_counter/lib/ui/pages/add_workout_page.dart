@@ -64,12 +64,14 @@ class _AddWorkoutPageState extends State<AddWorkoutPage> {
                 initialValue: '0',
                 onSaved: (value) => _target = int.parse(value ?? '0'),
               ),
+              const SizedBox(height: 20),
               TextFormField(
                 decoration: const InputDecoration(labelText: 'Time in seconds (0 for unlimited)'),
                 keyboardType: TextInputType.number,
                 initialValue: '0',
                 onSaved: (value) => _time = int.parse(value ?? '0'),
               ),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _startWorkout,
                 child: const Text('Start Workout'),

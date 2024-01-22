@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:workout_counter/ui/pages/workout_tracker.dart';
+import 'package:workout_counter/ui/pages/workout_tracker_page.dart';
 
 import '../ui/pages/add_workout_page.dart';
 import '../ui/pages/base_page.dart';

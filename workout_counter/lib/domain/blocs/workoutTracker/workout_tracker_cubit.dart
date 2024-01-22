@@ -11,6 +11,7 @@ class WorkoutTrackerCubit extends Cubit<WorkoutTrackerState> {
   final BluetoothConnectionCubit bluetoothConnectionCubit;
   StreamSubscription? imuDataSubscription;
   int _pushUpCounter = 0;
+  bool _isInPushup = false;
 
   WorkoutTrackerCubit(this.bluetoothConnectionCubit) : super(const WorkoutTrackerState.initial());
 
@@ -49,6 +50,24 @@ class WorkoutTrackerCubit extends Cubit<WorkoutTrackerState> {
 
   bool _isPushUp(List<IMUData> imuData) {
     // Implement push-up detection logic based on IMU data
+    print('Z (ACC): ${imuData.last.accData.z}, (GYRO): ${imuData.last.gyroData.z}');
+    const double pushUpStartThreshold = 20; // Adjust based on your data
+    const double pushUpEndThreshold = 2; // Adjust based on your data
+
+    IMUData latestData = imuData.last;
+
+    // If latest measured acceleration is not in the range of 4 m/s^2, it's not a push-up.
+    if (latestData.accData.z > 4 || latestData.accData.z < -4) {
+      return false;
+    }
+
+    if (!_isInPushup && latestData.gyroData.z < pushUpStartThreshold) {
+      _isInPushup = true;
+    } else if (_isInPushup && latestData.gyroData.z > pushUpEndThreshold) {
+      _isInPushup = false;
+      return true;
+    }
+
     return false;
   }
 }

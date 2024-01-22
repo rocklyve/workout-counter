@@ -17,10 +17,10 @@ class _BasePageState extends State<BasePage> {
     return AutoTabsScaffold(
       routes: const [
         HomeRoute(),
-        FeedRoute(),
+        // FeedRoute(),
         AddWorkoutRoute(),
         StatsRoute(),
-        ProfileRoute(),
+        // ProfileRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
         return BottomNavigationBar(
@@ -33,10 +33,10 @@ class _BasePageState extends State<BasePage> {
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.dashboard)),
-            BottomNavigationBarItem(label: 'Feed', icon: Icon(Icons.feed)),
+            // BottomNavigationBarItem(label: 'Feed', icon: Icon(Icons.feed)),
             BottomNavigationBarItem(label: 'Add', icon: Icon(Icons.add)),
             BottomNavigationBarItem(label: 'Stats', icon: Icon(Icons.bar_chart)),
-            BottomNavigationBarItem(label: 'Profile', icon: Icon(Icons.person)),
+            // BottomNavigationBarItem(label: 'Profile', icon: Icon(Icons.person)),
           ],
         );
       },

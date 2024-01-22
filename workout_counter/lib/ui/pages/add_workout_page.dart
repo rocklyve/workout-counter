@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_counter/domain/blocs/workoutTracker/workout_tracker_cubit.dart';
 import 'package:workout_counter/routing/router.dart';
 
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
@@ -35,12 +34,14 @@ class _AddWorkoutPageState extends State<AddWorkoutPage> {
         print('Starting workout with type $_workoutType, target $_target, time $_time');
 
         // call WorkoutTrackerCubit function to start workout
-        context.read<WorkoutTrackerCubit>().startCounting();
-
+        // context.read<WorkoutTrackerCubit>().startCounting();
+        //
         context.router.push(const WorkoutTrackerRoute());
       } else {
         print('Bluetooth connection not active. Opening connection page.');
-        context.router.push(const BluetoothConnectionRoute());
+        context.router.push(const WorkoutTrackerRoute());
+
+        // context.router.push(const BluetoothConnectionRoute());
       }
     }
   }

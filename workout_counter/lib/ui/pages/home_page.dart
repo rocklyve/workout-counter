@@ -114,6 +114,47 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             );
+          } else if (state is BluetoothConnectionStateObserving ||
+              state is BluetoothConnectionStateDisconnected ||
+              state is BluetoothConnectionStateDisconnecting ||
+              state is BluetoothConnectionStateInitial ||
+              state is BluetoothConnectionStateError) {
+            return Center(
+              child: Card(
+                color: Colors.purple[50],
+                elevation: 2.0,
+                margin: const EdgeInsets.all(16.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Icon(
+                        Icons.bluetooth_searching,
+                        size: 70.0,
+                        color: Colors.deepPurple,
+                      ),
+                      const SizedBox(height: 10),
+                      const Text(
+                        'Connect to BLE Device',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        'You first have to connect to the BLE device to start receiving data.',
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton(
+                        onPressed: () => bleButtonPressed(context),
+                        child: const Text('Connect'),
+                      ),
+                      // Add more information or buttons as needed
+                    ],
+                  ),
+                ),
+              ),
+            );
           }
 
           return const Center(child: CircularProgressIndicator());

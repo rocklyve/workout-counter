@@ -19,21 +19,21 @@ mixin _$WorkoutTrackerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int pushUpCounter) counting,
+    required TResult Function(int exerciseCounter) counting,
     required TResult Function(String message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int pushUpCounter)? counting,
+    TResult? Function(int exerciseCounter)? counting,
     TResult? Function(String message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int pushUpCounter)? counting,
+    TResult Function(int exerciseCounter)? counting,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) =>
@@ -123,7 +123,7 @@ class _$WorkoutTrackerStateInitialImpl implements WorkoutTrackerStateInitial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int pushUpCounter) counting,
+    required TResult Function(int exerciseCounter) counting,
     required TResult Function(String message) error,
   }) {
     return initial();
@@ -133,7 +133,7 @@ class _$WorkoutTrackerStateInitialImpl implements WorkoutTrackerStateInitial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int pushUpCounter)? counting,
+    TResult? Function(int exerciseCounter)? counting,
     TResult? Function(String message)? error,
   }) {
     return initial?.call();
@@ -143,7 +143,7 @@ class _$WorkoutTrackerStateInitialImpl implements WorkoutTrackerStateInitial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int pushUpCounter)? counting,
+    TResult Function(int exerciseCounter)? counting,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
@@ -199,7 +199,7 @@ abstract class _$$WorkoutTrackerStateCountingImplCopyWith<$Res> {
           $Res Function(_$WorkoutTrackerStateCountingImpl) then) =
       __$$WorkoutTrackerStateCountingImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int pushUpCounter});
+  $Res call({int exerciseCounter});
 }
 
 /// @nodoc
@@ -215,12 +215,12 @@ class __$$WorkoutTrackerStateCountingImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pushUpCounter = null,
+    Object? exerciseCounter = null,
   }) {
     return _then(_$WorkoutTrackerStateCountingImpl(
-      pushUpCounter: null == pushUpCounter
-          ? _value.pushUpCounter
-          : pushUpCounter // ignore: cast_nullable_to_non_nullable
+      exerciseCounter: null == exerciseCounter
+          ? _value.exerciseCounter
+          : exerciseCounter // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -229,14 +229,14 @@ class __$$WorkoutTrackerStateCountingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$WorkoutTrackerStateCountingImpl implements WorkoutTrackerStateCounting {
-  const _$WorkoutTrackerStateCountingImpl({required this.pushUpCounter});
+  const _$WorkoutTrackerStateCountingImpl({required this.exerciseCounter});
 
   @override
-  final int pushUpCounter;
+  final int exerciseCounter;
 
   @override
   String toString() {
-    return 'WorkoutTrackerState.counting(pushUpCounter: $pushUpCounter)';
+    return 'WorkoutTrackerState.counting(exerciseCounter: $exerciseCounter)';
   }
 
   @override
@@ -244,12 +244,12 @@ class _$WorkoutTrackerStateCountingImpl implements WorkoutTrackerStateCounting {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$WorkoutTrackerStateCountingImpl &&
-            (identical(other.pushUpCounter, pushUpCounter) ||
-                other.pushUpCounter == pushUpCounter));
+            (identical(other.exerciseCounter, exerciseCounter) ||
+                other.exerciseCounter == exerciseCounter));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, pushUpCounter);
+  int get hashCode => Object.hash(runtimeType, exerciseCounter);
 
   @JsonKey(ignore: true)
   @override
@@ -262,32 +262,32 @@ class _$WorkoutTrackerStateCountingImpl implements WorkoutTrackerStateCounting {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int pushUpCounter) counting,
+    required TResult Function(int exerciseCounter) counting,
     required TResult Function(String message) error,
   }) {
-    return counting(pushUpCounter);
+    return counting(exerciseCounter);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int pushUpCounter)? counting,
+    TResult? Function(int exerciseCounter)? counting,
     TResult? Function(String message)? error,
   }) {
-    return counting?.call(pushUpCounter);
+    return counting?.call(exerciseCounter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int pushUpCounter)? counting,
+    TResult Function(int exerciseCounter)? counting,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {
     if (counting != null) {
-      return counting(pushUpCounter);
+      return counting(exerciseCounter);
     }
     return orElse();
   }
@@ -329,9 +329,9 @@ class _$WorkoutTrackerStateCountingImpl implements WorkoutTrackerStateCounting {
 
 abstract class WorkoutTrackerStateCounting implements WorkoutTrackerState {
   const factory WorkoutTrackerStateCounting(
-      {required final int pushUpCounter}) = _$WorkoutTrackerStateCountingImpl;
+      {required final int exerciseCounter}) = _$WorkoutTrackerStateCountingImpl;
 
-  int get pushUpCounter;
+  int get exerciseCounter;
   @JsonKey(ignore: true)
   _$$WorkoutTrackerStateCountingImplCopyWith<_$WorkoutTrackerStateCountingImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -406,7 +406,7 @@ class _$WorkoutTrackerStateErrorImpl implements WorkoutTrackerStateError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int pushUpCounter) counting,
+    required TResult Function(int exerciseCounter) counting,
     required TResult Function(String message) error,
   }) {
     return error(message);
@@ -416,7 +416,7 @@ class _$WorkoutTrackerStateErrorImpl implements WorkoutTrackerStateError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int pushUpCounter)? counting,
+    TResult? Function(int exerciseCounter)? counting,
     TResult? Function(String message)? error,
   }) {
     return error?.call(message);
@@ -426,7 +426,7 @@ class _$WorkoutTrackerStateErrorImpl implements WorkoutTrackerStateError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int pushUpCounter)? counting,
+    TResult Function(int exerciseCounter)? counting,
     TResult Function(String message)? error,
     required TResult orElse(),
   }) {

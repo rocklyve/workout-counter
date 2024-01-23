@@ -91,7 +91,7 @@ class _WorkoutTrackerPageState extends State<WorkoutTrackerPage> {
                 children: [
                   AnimatedFlipCounter(
                     duration: const Duration(milliseconds: 300),
-                    value: state.pushUpCounter,
+                    value: state.exerciseCounter,
                     textStyle: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 120,

@@ -20,7 +20,7 @@ class _BasePageState extends State<BasePage> {
         HomeRoute(),
         // FeedRoute(),
         AddWorkoutRoute(),
-        StatsRoute(),
+        // StatsRoute(),
         // ProfileRoute(),
       ],
       bottomNavigationBuilder: (_, tabsRouter) {
@@ -50,15 +50,15 @@ class _BasePageState extends State<BasePage> {
               ),
               title: const Text('Add'),
             ),
-            SalomonBottomBarItem(
-              selectedColor: Colors.purple[600],
-              unselectedColor: Colors.purple[200],
-              icon: const Icon(
-                Icons.bar_chart,
-                size: 30,
-              ),
-              title: const Text('Stats'),
-            ),
+            // SalomonBottomBarItem(
+            //   selectedColor: Colors.purple[600],
+            //   unselectedColor: Colors.purple[200],
+            //   icon: const Icon(
+            //     Icons.bar_chart,
+            //     size: 30,
+            //   ),
+            //   title: const Text('Stats'),
+            // ),
           ],
         );
       },

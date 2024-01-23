@@ -1,0 +1,4 @@
+enum WorkoutType {
+  pushUp,
+  sitUp,
+}

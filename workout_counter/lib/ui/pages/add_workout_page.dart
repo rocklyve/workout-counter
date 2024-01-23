@@ -6,6 +6,7 @@ import 'package:workout_counter/routing/router.dart';
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_cubit.dart';
 import '../../domain/blocs/bluetoothConnector/bluetooth_connection_state.dart';
 import '../../domain/blocs/workoutTracker/workout_tracker_cubit.dart';
+import '../../domain/models/workout_type.dart';
 import '../widgets/custom_app_bar.dart';
 
 @RoutePage()
@@ -17,15 +18,16 @@ class AddWorkoutPage extends StatefulWidget {
 }
 
 class _AddWorkoutPageState extends State<AddWorkoutPage> {
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   final _formKey = GlobalKey<FormState>();
-  String _workoutType = "Pushups";
-  int _target = 0;
-  int _time = 0;
+  final List<WorkoutType> _workoutType = [WorkoutType.sitUp, WorkoutType.pushUp];
+
+  WorkoutType? _selectedWorkoutType;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedWorkoutType = _workoutType.first; // Default to the first workout type
+  }
 
   void _startWorkout() {
     if (_formKey.currentState!.validate()) {
@@ -33,10 +35,8 @@ class _AddWorkoutPageState extends State<AddWorkoutPage> {
 
       var bleState = context.read<BluetoothConnectionCubit>().state;
       if (bleState is BluetoothConnectionStateConnected || bleState is BluetoothConnectionStateDataReceived) {
-        print('Starting workout with type $_workoutType, target $_target, time $_time');
-
         // call WorkoutTrackerCubit function to start workout
-        context.read<WorkoutTrackerCubit>().startCounting();
+        context.read<WorkoutTrackerCubit>().startCounting(_selectedWorkoutType!);
 
         context.router.push(const WorkoutTrackerRoute());
       } else {
@@ -45,6 +45,11 @@ class _AddWorkoutPageState extends State<AddWorkoutPage> {
         context.router.push(const BluetoothConnectionRoute());
       }
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -58,20 +63,20 @@ class _AddWorkoutPageState extends State<AddWorkoutPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Target (0 for unlimited)'),
-                keyboardType: TextInputType.number,
-                initialValue: '0',
-                onSaved: (value) => _target = int.parse(value ?? '0'),
+              DropdownButtonFormField<WorkoutType>(
+                value: _selectedWorkoutType,
+                decoration: const InputDecoration(labelText: 'Workout Type'),
+                onChanged: (WorkoutType? newValue) {
+                  _selectedWorkoutType = newValue;
+                },
+                items: _workoutType.map<DropdownMenuItem<WorkoutType>>((WorkoutType value) {
+                  return DropdownMenuItem<WorkoutType>(
+                    value: value,
+                    child: Text(value.toString().split('.').last),
+                  );
+                }).toList(),
               ),
-              const SizedBox(height: 20),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Time in seconds (0 for unlimited)'),
-                keyboardType: TextInputType.number,
-                initialValue: '0',
-                onSaved: (value) => _time = int.parse(value ?? '0'),
-              ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 50),
               ElevatedButton(
                 onPressed: _startWorkout,
                 child: const Text('Start Workout'),

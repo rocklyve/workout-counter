@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_reactive_ble/flutter_reactive_ble.dart';
 import 'package:workout_counter/domain/models/imu_data.dart';
+import 'package:workout_counter/domain/models/low_pass_filter.dart';
 
 import '../../models/temperature_data.dart';
 import 'bluetooth_connection_state.dart';
@@ -109,13 +110,27 @@ class BluetoothConnectionCubit extends Cubit<BluetoothConnectionState> {
       deviceId: deviceId,
     );
 
+    LowPassFilter accXFilter = LowPassFilter(alpha: 0.1);
+    LowPassFilter accYFilter = LowPassFilter(alpha: 0.1);
+    LowPassFilter accZFilter = LowPassFilter(alpha: 0.1);
+    LowPassFilter gyroXFilter = LowPassFilter(alpha: 0.1);
+    LowPassFilter gyroYFilter = LowPassFilter(alpha: 0.1);
+    LowPassFilter gyroZFilter = LowPassFilter(alpha: 0.1);
+    LowPassFilter magXFilter = LowPassFilter(alpha: 0.1);
+    LowPassFilter magYFilter = LowPassFilter(alpha: 0.1);
+    LowPassFilter magZFilter = LowPassFilter(alpha: 0.1);
+
     StreamSubscription _ = _flutterReactiveBle.subscribeToCharacteristic(characteristic).listen(
       (data) {
         // Handle received data for each characteristic.
         String receivedString = String.fromCharCodes(data);
         // Print("Received data from $characteristicUuid: $receivedString");.
         IMUData? imuData = _getIMUData(receivedString, characteristicUuid);
-        if (imuData != null) _receivedIMUData.add(imuData);
+        if (imuData != null) {
+          imuData = _filterIMUData(imuData, accXFilter, accYFilter, accZFilter, gyroXFilter, gyroYFilter, gyroZFilter,
+              magXFilter, magYFilter, magZFilter);
+          _receivedIMUData.add(imuData);
+        }
         if (_receivedIMUData.length > _amountOfDataPoints) _receivedIMUData.removeAt(0);
 
         TemperatureData? objTempData = _getObjTempData(receivedString, characteristicUuid);
@@ -143,6 +158,31 @@ class BluetoothConnectionCubit extends Cubit<BluetoothConnectionState> {
         ));
       },
     );
+  }
+
+  IMUData _filterIMUData(
+    IMUData data,
+    LowPassFilter accXFilter,
+    LowPassFilter accYFilter,
+    LowPassFilter accZFilter,
+    LowPassFilter gyroXFilter,
+    LowPassFilter gyroYFilter,
+    LowPassFilter gyroZFilter,
+    LowPassFilter magXFilter,
+    LowPassFilter magYFilter,
+    LowPassFilter magZFilter,
+  ) {
+    data.accData.x = accXFilter.filter(data.accData.x);
+    data.accData.y = accYFilter.filter(data.accData.y);
+    data.accData.z = accZFilter.filter(data.accData.z);
+    data.gyroData.x = gyroXFilter.filter(data.gyroData.x);
+    data.gyroData.y = gyroYFilter.filter(data.gyroData.y);
+    data.gyroData.z = gyroZFilter.filter(data.gyroData.z);
+    data.magData.x = magXFilter.filter(data.magData.x);
+    data.magData.y = magYFilter.filter(data.magData.y);
+    data.magData.z = magZFilter.filter(data.magData.z);
+
+    return data;
   }
 
   IMUData? _getIMUData(String receivedString, String characteristicUuid) {

@@ -25,6 +25,10 @@ class BluetoothConnectionPage extends StatelessWidget {
     }
   }
 
+  void _closeButtonPressed(BuildContext context) {
+    context.router.pop();
+  }
+
   @override
   Widget build(BuildContext context) {
     print('BluetoothConnectionPage build');
@@ -42,6 +46,24 @@ class BluetoothConnectionPage extends StatelessWidget {
               onRefresh: () => _onRefresh(context),
               child: const Center(
                 child: Text('Connected to device'),
+              ),
+            );
+          }
+
+          if (state is BluetoothConnectionStateDataReceived) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Connected to device'),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      _closeButtonPressed(context);
+                    },
+                    child: Text('Close'),
+                  ),
+                ],
               ),
             );
           }

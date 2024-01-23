@@ -39,7 +39,7 @@ const int interval = 20;          // Sampling interval in milliseconds (50Hz)
 
 int measurement_state = 1; // Initial measurement state
 
-BLEService dataService("001A"); // Custom service UUID
+BLEService dataService("001A");
 BLECharacteristic imuCharacteristic("200A", BLERead | BLENotify, 40);
 BLECharacteristic objectTempCharacteristic("200B", BLERead | BLENotify, 20);
 BLECharacteristic sensorTempCharacteristic("200C", BLERead | BLENotify, 20);
@@ -51,7 +51,7 @@ void setupBLE();
 void initializeMLXSensor(Protocentral_MLX90632 &sensor, uint8_t index);
 void initializeIMU();
 void readSensorData(int *data);
-void saveDataToSDCard(int *data, int id);
+void persistData(int *data, int id);
 void stopMeasurement();
 
 /*****************************************  setup() *************************************************/
@@ -79,15 +79,15 @@ void loop()
   BLEDevice central = BLE.central();
   if (central) {
     if (central.connected()) {
-      // if (isDebugMode) {
+      if (isDebugMode) {
         Serial.println("Connected to a central device.");
-      // }
+      }
     }
   }
 
-  unsigned long currentMillis = millis(); // Grab current time
+  unsigned long currentMillis = millis();
 
-  if (currentMillis - previousMillis >= interval)
+  if (currentMillis - previousMillis >= interval) // ensure the data will be tracked with the correct Hz rate
   {
     if (found_sensor_counter != amount_of_sensors)
     {
@@ -97,10 +97,8 @@ void loop()
       delay(10000);
     }
 
-    // else
-    // {
     memset(data, 0, sizeof(data));
-    data[0] = amount_of_data_columns; // Number of data elements
+    data[0] = amount_of_data_columns;
 
     if (stopMeasurementButtonPressedFlag)
     {
@@ -108,7 +106,7 @@ void loop()
     }
 
     readSensorData(data);
-    saveDataToSDCard(data, measurement_state);
+    persistData(data, measurement_state);
     // print data
     if (isDebugMode)
     {
@@ -258,11 +256,6 @@ void readTemperatureSensorData(int *data)
     {
       sensor_index_to_read = 0;
     }
-    // for (uint8_t i = 0; i < amount_of_sensors; i++)
-    // {
-    //   data[i + 1] = 0;
-    //   data[amount_of_sensors + i + 1] = 0;
-    // }
 
     mux.openChannel(MLX_CHANNELS[sensor_index_to_read]);
     data[sensor_index_to_read + 1] = mlx[sensor_index_to_read].get_Temp() * 100;
@@ -275,7 +268,6 @@ void readTemperatureSensorData(int *data)
 
     mux.closeChannel(MLX_CHANNELS[sensor_index_to_read]);
     sensor_index_to_read++;
-    // }
   }
 }
 
@@ -303,7 +295,7 @@ void readIMUSensorData(int *data)
   data[2 * amount_of_sensors + 9] = magZ * imu_muliplicator;
 }
 
-void saveDataToSDCard(int *data, int id)
+void persistData(int *data, int id)
 {
   unsigned int timestamp = millis();
   // String data_string = convert_int_to_string(data);
@@ -312,7 +304,7 @@ void saveDataToSDCard(int *data, int id)
   int objectTempEndIndex = 6;
 
   int sensorTempStartIndex = 7;
-  int sensorTempEndIndex = 12; // Adjust these indices as per your data structure
+  int sensorTempEndIndex = 12;
 
   int imuStartIndex = 13;
   int imuEndIndex = 21;
@@ -320,10 +312,11 @@ void saveDataToSDCard(int *data, int id)
   String data_string_imu = convert_int_to_string(data, imuStartIndex, imuEndIndex);
   String data_string_objTemp = convert_int_to_string(data, objectTempStartIndex, objectTempEndIndex);
   String data_string_sensorTemp = convert_int_to_string(data, sensorTempStartIndex, sensorTempEndIndex);
-  // logger->data_callback(id, timestamp, data_string);
+  
   imuCharacteristic.writeValue(data_string_imu.c_str());
   objectTempCharacteristic.writeValue(data_string_objTemp.c_str());
   sensorTempCharacteristic.writeValue(data_string_sensorTemp.c_str());
+  
   if (isDebugMode) {
         Serial.print("BLE: ");
         Serial.print(timestamp);
@@ -364,10 +357,8 @@ String convert_int_to_string(int *data, int start, int end) {
 void stopMeasurement()
 {
   unsigned int timestamp = millis();
-  //logger->data_callback(-1, timestamp, "");
   Serial.println("Stop BLE Measurement");
 
-  //logger->end();
   ledManager.changeLEDColor(-1);
   if (isDebugMode)
   {

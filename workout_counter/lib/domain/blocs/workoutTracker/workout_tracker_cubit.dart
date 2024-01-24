@@ -71,8 +71,8 @@ class WorkoutTrackerCubit extends Cubit<WorkoutTrackerState> {
     // Implement push-up detection logic based on IMU data
     print('(ACC x): ${imuData.last.accData.x}');
     // assume accData.x is always -9.81 per default
-    const double pushUpStartThreshold = -12;
-    const double pushUpEndThreshold = -6;
+    const double pushUpStartThreshold = -11;
+    const double pushUpEndThreshold = -7;
 
     const double sideThreshold = 7;
 
@@ -95,10 +95,10 @@ class WorkoutTrackerCubit extends Cubit<WorkoutTrackerState> {
   }
 
   bool _isSitUp(List<IMUData> imuData) {
-    // Implement push-up detection logic based on IMU data
+    // Implement push-up detection logic based on IMU data.
     print('(ACC): (${imuData.last.accData.x})');
-    const double sitUpStartThreshold = 20;
-    const double sitUpEndThreshold = -10;
+    const double sitUpStartThreshold = 15;
+    const double sitUpEndThreshold = -5;
 
     IMUData latestData = imuData.last;
 
@@ -106,6 +106,7 @@ class WorkoutTrackerCubit extends Cubit<WorkoutTrackerState> {
       _isInExercise = true;
     } else if (_isInExercise && latestData.gyroData.z < sitUpEndThreshold) {
       _isInExercise = false;
+
       return true;
     }
 

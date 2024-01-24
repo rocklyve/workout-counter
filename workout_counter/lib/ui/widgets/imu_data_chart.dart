@@ -51,50 +51,68 @@ class IMUDataChart extends StatelessWidget {
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              Container(
-                height: 200,
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: LineChart(
-                  LineChartData(
-                    gridData: const FlGridData(show: false),
-                    titlesData: const FlTitlesData(show: false),
-                    borderData: FlBorderData(show: false),
-                    lineBarsData: [
-                      LineChartBarData(
-                        spots: data.item1
-                            .asMap()
-                            .entries
-                            .map((e) => FlSpot(e.key.toDouble(), e.value.toDouble()))
-                            .toList(),
-                        isCurved: true,
-                        dotData: const FlDotData(show: false),
-                        color: Colors.red,
-                        belowBarData: BarAreaData(show: false),
+              Card(
+                color: Colors.white,
+                elevation: 2.0,
+                margin: const EdgeInsets.all(16.0),
+                child: Container(
+                  height: 200,
+                  padding: const EdgeInsets.only(top: 16, bottom: 16, right: 16),
+                  child: LineChart(
+                    LineChartData(
+                      gridData: const FlGridData(show: false),
+                      titlesData: FlTitlesData(
+                        leftTitles: AxisTitles(
+                          sideTitles: SideTitles(reservedSize: 50, showTitles: true),
+                        ),
+                        rightTitles: AxisTitles(
+                          sideTitles: SideTitles(reservedSize: 0, showTitles: false),
+                        ),
+                        topTitles: AxisTitles(
+                          sideTitles: SideTitles(reservedSize: 0, showTitles: false),
+                        ),
+                        bottomTitles: AxisTitles(
+                          sideTitles: SideTitles(reservedSize: 0, showTitles: false),
+                        ),
                       ),
-                      LineChartBarData(
-                        spots: data.item2
-                            .asMap()
-                            .entries
-                            .map((e) => FlSpot(e.key.toDouble(), e.value.toDouble()))
-                            .toList(),
-                        isCurved: true,
-                        dotData: const FlDotData(show: false),
-                        color: Colors.green,
-                        belowBarData: BarAreaData(show: false),
-                      ),
-                      LineChartBarData(
-                        spots: data.item3
-                            .asMap()
-                            .entries
-                            .map((e) => FlSpot(e.key.toDouble(), e.value.toDouble()))
-                            .toList(),
-                        isCurved: true,
-                        dotData: const FlDotData(show: false),
-                        color: Colors.blue,
-                        belowBarData: BarAreaData(show: false),
-                      ),
-                    ],
-                    lineTouchData: const LineTouchData(enabled: false),
+                      borderData: FlBorderData(show: false),
+                      lineBarsData: [
+                        LineChartBarData(
+                          spots: data.item1
+                              .asMap()
+                              .entries
+                              .map((e) => FlSpot(e.key.toDouble(), e.value.toDouble()))
+                              .toList(),
+                          isCurved: true,
+                          dotData: const FlDotData(show: false),
+                          color: Colors.red,
+                          belowBarData: BarAreaData(show: false),
+                        ),
+                        LineChartBarData(
+                          spots: data.item2
+                              .asMap()
+                              .entries
+                              .map((e) => FlSpot(e.key.toDouble(), e.value.toDouble()))
+                              .toList(),
+                          isCurved: true,
+                          dotData: const FlDotData(show: false),
+                          color: Colors.green,
+                          belowBarData: BarAreaData(show: false),
+                        ),
+                        LineChartBarData(
+                          spots: data.item3
+                              .asMap()
+                              .entries
+                              .map((e) => FlSpot(e.key.toDouble(), e.value.toDouble()))
+                              .toList(),
+                          isCurved: true,
+                          dotData: const FlDotData(show: false),
+                          color: Colors.blue,
+                          belowBarData: BarAreaData(show: false),
+                        ),
+                      ],
+                      lineTouchData: const LineTouchData(enabled: false),
+                    ),
                   ),
                 ),
               ),

@@ -69,19 +69,23 @@ class WorkoutTrackerCubit extends Cubit<WorkoutTrackerState> {
 
   bool _isPushUp(List<IMUData> imuData) {
     // Implement push-up detection logic based on IMU data
-    print('Z (ACC): ${imuData.last.accData.z}, (GYRO): ${imuData.last.gyroData.z}');
-    const double pushUpStartThreshold = 20;
-    const double pushUpEndThreshold = -10;
+    print('(ACC x): ${imuData.last.accData.x}');
+    // assume accData.x is always -9.81 per default
+    const double pushUpStartThreshold = -12;
+    const double pushUpEndThreshold = -6;
+
+    const double sideThreshold = 7;
 
     IMUData latestData = imuData.last;
 
-    if (latestData.accData.z > 4 || latestData.accData.z < -4) {
+    if ((latestData.accData.z > sideThreshold || latestData.accData.z < -sideThreshold) ||
+        (latestData.accData.y > sideThreshold || latestData.accData.y < -sideThreshold)) {
       return false;
     }
 
-    if (!_isInExercise && latestData.gyroData.z > pushUpStartThreshold) {
+    if (!_isInExercise && latestData.accData.x < pushUpStartThreshold) {
       _isInExercise = true;
-    } else if (_isInExercise && latestData.gyroData.z < pushUpEndThreshold) {
+    } else if (_isInExercise && latestData.accData.x > pushUpEndThreshold) {
       _isInExercise = false;
 
       return true;
@@ -92,16 +96,11 @@ class WorkoutTrackerCubit extends Cubit<WorkoutTrackerState> {
 
   bool _isSitUp(List<IMUData> imuData) {
     // Implement push-up detection logic based on IMU data
-    print('Z (ACC): ${imuData.last.accData.z}, (GYRO): ${imuData.last.gyroData.z}');
-    const double sitUpStartThreshold = 20; // Adjust based on your data
-    const double sitUpEndThreshold = -10; // Adjust based on your data
+    print('(ACC): (${imuData.last.accData.x})');
+    const double sitUpStartThreshold = 20;
+    const double sitUpEndThreshold = -10;
 
     IMUData latestData = imuData.last;
-
-    // If latest measured acceleration is not in the range of 4 m/s^2, it's not a push-up.
-    if (latestData.accData.z > 4 || latestData.accData.z < -4) {
-      return false;
-    }
 
     if (!_isInExercise && latestData.gyroData.z > sitUpStartThreshold) {
       _isInExercise = true;
